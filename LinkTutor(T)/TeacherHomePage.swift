@@ -43,7 +43,7 @@ struct TeacherHomePage: View{
                             Spacer()
                         }
                         .font(AppFont.mediumSemiBold)
-                        .frame(width: .infinity, height: 35)
+                      // .frame(width: .infinity, height: 35)
                         .padding()
                         .background(Color.accent)
                         .foregroundStyle(Color.black)

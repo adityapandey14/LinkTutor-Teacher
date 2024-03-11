@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ProfileInputView: View {
-    
     @State private var image: Image?
     @State private var name: String = ""
     @State private var email: String = ""
@@ -41,7 +40,7 @@ struct ProfileInputView: View {
                             if let image = image {
                                 image
                                     .resizable()
-                                    
+                                    .scaledToFit()
                                     .frame(width: 100, height: 100)
                                     .cornerRadius(50.0)
                             } else {

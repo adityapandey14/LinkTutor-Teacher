@@ -10,13 +10,11 @@
 		0F2EF9922B90845600CFE747 /* teachersTimetableSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2EF9912B90845600CFE747 /* teachersTimetableSwiftUIView.swift */; };
 		0F2EF9942B90853300CFE747 /* TimeTableCardSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2EF9932B90853300CFE747 /* TimeTableCardSwiftUIView.swift */; };
 		0F3922682B8F20270019ECA5 /* addCoursePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3922672B8F20270019ECA5 /* addCoursePage.swift */; };
-		0FA43A7E2B9082D3000858CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FA43A7D2B9082D3000858CA /* GoogleService-Info.plist */; };
 		0FA43A822B90832C000858CA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0FA43A812B90832C000858CA /* FirebaseAnalytics */; };
 		0FA43A842B90832C000858CA /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0FA43A832B90832C000858CA /* FirebaseAnalyticsSwift */; };
 		0FA43A862B90832C000858CA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0FA43A852B90832C000858CA /* FirebaseAuth */; };
 		0FA43A882B90832C000858CA /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0FA43A872B90832C000858CA /* FirebaseDatabaseSwift */; };
 		0FA43A8A2B90832C000858CA /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0FA43A892B90832C000858CA /* FirebaseFirestoreSwift */; };
-		0FA43A8C2B90832C000858CA /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 0FA43A8B2B90832C000858CA /* FirebaseFunctions */; };
 		0FA43A8E2B90832C000858CA /* FirebaseInAppMessagingSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 0FA43A8D2B90832C000858CA /* FirebaseInAppMessagingSwift-Beta */; };
 		0FA43A902B90832C000858CA /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0FA43A8F2B90832C000858CA /* FirebaseRemoteConfigSwift */; };
 		0FC7380F2B8DE67E00566981 /* LinkTutor_T_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC7380E2B8DE67E00566981 /* LinkTutor_T_App.swift */; };
@@ -32,11 +30,7 @@
 		0FC7383F2B8DE6D300566981 /* TeacherEnrolledClassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC7383E2B8DE6D300566981 /* TeacherEnrolledClassCard.swift */; };
 		0FC738412B8DE6DC00566981 /* TeacherEnrolledClassList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738402B8DE6DC00566981 /* TeacherEnrolledClassList.swift */; };
 		0FC738432B8DE6E800566981 /* myProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738422B8DE6E800566981 /* myProfileView.swift */; };
-		0FC738492B8DE6F800566981 /* signUpSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738442B8DE6F800566981 /* signUpSwiftUIView.swift */; };
-		0FC7384A2B8DE6F800566981 /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738452B8DE6F800566981 /* DeleteAccountView.swift */; };
 		0FC7384B2B8DE6F800566981 /* loginPageSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738462B8DE6F800566981 /* loginPageSwiftUIView.swift */; };
-		0FC7384C2B8DE6F800566981 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738472B8DE6F800566981 /* ChangePasswordView.swift */; };
-		0FC7384D2B8DE6F800566981 /* ProfileInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738482B8DE6F800566981 /* ProfileInputView.swift */; };
 		0FC7384F2B8DE71200566981 /* profileCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC7384E2B8DE71200566981 /* profileCard.swift */; };
 		0FC738512B8DE73A00566981 /* enrolledClassDataM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738502B8DE73A00566981 /* enrolledClassDataM.swift */; };
 		0FC738532B8DE74D00566981 /* listClassesScreeenModel().swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738522B8DE74D00566981 /* listClassesScreeenModel().swift */; };
@@ -51,6 +45,13 @@
 		0FC738652B8DE7F400566981 /* sectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738642B8DE7F400566981 /* sectionHeader.swift */; };
 		0FC738672B8DE88000566981 /* classMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738662B8DE88000566981 /* classMockData.swift */; };
 		0FE4B9372B9052A6008CB61A /* classLocationSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE4B9362B9052A6008CB61A /* classLocationSwiftUIView.swift */; };
+		DF70D9542B9EF37F00461DF0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D9532B9EF37F00461DF0 /* User.swift */; };
+		DF70D9562B9EF46000461DF0 /* signUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D9552B9EF46000461DF0 /* signUpView.swift */; };
+		DF70D9582B9EF49800461DF0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DF70D9572B9EF49800461DF0 /* FirebaseStorage */; };
+		DF70D95A2B9EFAC200461DF0 /* ProfileInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D9592B9EFAC200461DF0 /* ProfileInputView.swift */; };
+		DF70D95C2B9EFAD900461DF0 /* newPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D95B2B9EFAD900461DF0 /* newPassword.swift */; };
+		DFCC35F12B9FA01C0087BD00 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCC35F02B9FA01C0087BD00 /* AuthViewModel.swift */; };
+		DFCC35F32B9FA0E60087BD00 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFCC35F22B9FA0E60087BD00 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +75,6 @@
 		0F2EF9912B90845600CFE747 /* teachersTimetableSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = teachersTimetableSwiftUIView.swift; sourceTree = "<group>"; };
 		0F2EF9932B90853300CFE747 /* TimeTableCardSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableCardSwiftUIView.swift; sourceTree = "<group>"; };
 		0F3922672B8F20270019ECA5 /* addCoursePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addCoursePage.swift; sourceTree = "<group>"; };
-		0FA43A7D2B9082D3000858CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0FC7380B2B8DE67E00566981 /* LinkTutor(T).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LinkTutor(T).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FC7380E2B8DE67E00566981 /* LinkTutor_T_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTutor_T_App.swift; sourceTree = "<group>"; };
 		0FC738102B8DE67E00566981 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,11 +91,7 @@
 		0FC7383E2B8DE6D300566981 /* TeacherEnrolledClassCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherEnrolledClassCard.swift; sourceTree = "<group>"; };
 		0FC738402B8DE6DC00566981 /* TeacherEnrolledClassList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherEnrolledClassList.swift; sourceTree = "<group>"; };
 		0FC738422B8DE6E800566981 /* myProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myProfileView.swift; sourceTree = "<group>"; };
-		0FC738442B8DE6F800566981 /* signUpSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signUpSwiftUIView.swift; sourceTree = "<group>"; };
-		0FC738452B8DE6F800566981 /* DeleteAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
 		0FC738462B8DE6F800566981 /* loginPageSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginPageSwiftUIView.swift; sourceTree = "<group>"; };
-		0FC738472B8DE6F800566981 /* ChangePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
-		0FC738482B8DE6F800566981 /* ProfileInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInputView.swift; sourceTree = "<group>"; };
 		0FC7384E2B8DE71200566981 /* profileCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileCard.swift; sourceTree = "<group>"; };
 		0FC738502B8DE73A00566981 /* enrolledClassDataM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enrolledClassDataM.swift; sourceTree = "<group>"; };
 		0FC738522B8DE74D00566981 /* listClassesScreeenModel().swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "listClassesScreeenModel().swift"; sourceTree = "<group>"; };
@@ -110,6 +106,12 @@
 		0FC738642B8DE7F400566981 /* sectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sectionHeader.swift; sourceTree = "<group>"; };
 		0FC738662B8DE88000566981 /* classMockData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classMockData.swift; sourceTree = "<group>"; };
 		0FE4B9362B9052A6008CB61A /* classLocationSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classLocationSwiftUIView.swift; sourceTree = "<group>"; };
+		DF70D9532B9EF37F00461DF0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/linkTutor/linkTutor/Screens/LoginSignUp/DataModel/User.swift"; sourceTree = "<group>"; };
+		DF70D9552B9EF46000461DF0 /* signUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = signUpView.swift; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/linkTutor/linkTutor/Screens/LoginSignUp/signUpView.swift"; sourceTree = "<group>"; };
+		DF70D9592B9EFAC200461DF0 /* ProfileInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInputView.swift; sourceTree = "<group>"; };
+		DF70D95B2B9EFAD900461DF0 /* newPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newPassword.swift; sourceTree = "<group>"; };
+		DFCC35F02B9FA01C0087BD00 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		DFCC35F22B9FA0E60087BD00 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,10 +121,10 @@
 			files = (
 				0FA43A8A2B90832C000858CA /* FirebaseFirestoreSwift in Frameworks */,
 				0FA43A902B90832C000858CA /* FirebaseRemoteConfigSwift in Frameworks */,
+				DF70D9582B9EF49800461DF0 /* FirebaseStorage in Frameworks */,
 				0FA43A882B90832C000858CA /* FirebaseDatabaseSwift in Frameworks */,
 				0FA43A8E2B90832C000858CA /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
 				0FA43A842B90832C000858CA /* FirebaseAnalyticsSwift in Frameworks */,
-				0FA43A8C2B90832C000858CA /* FirebaseFunctions in Frameworks */,
 				0FA43A862B90832C000858CA /* FirebaseAuth in Frameworks */,
 				0FA43A822B90832C000858CA /* FirebaseAnalytics in Frameworks */,
 			);
@@ -177,15 +179,15 @@
 			isa = PBXGroup;
 			children = (
 				0FC738382B8DE6A400566981 /* appFonts.swift */,
-				0FA43A7D2B9082D3000858CA /* GoogleService-Info.plist */,
+				0FC738102B8DE67E00566981 /* ContentView.swift */,
 				0FC7380E2B8DE67E00566981 /* LinkTutor_T_App.swift */,
 				0FC7383A2B8DE6B800566981 /* TeacherHomePage.swift */,
 				0F3922672B8F20270019ECA5 /* addCoursePage.swift */,
+				DFCC35F22B9FA0E60087BD00 /* GoogleService-Info.plist */,
 				0F2EF9912B90845600CFE747 /* teachersTimetableSwiftUIView.swift */,
 				0F2EF9932B90853300CFE747 /* TimeTableCardSwiftUIView.swift */,
 				0FE4B9352B90450A008CB61A /* TeacherEnrolledClasses */,
 				0FC738522B8DE74D00566981 /* listClassesScreeenModel().swift */,
-				0FC738102B8DE67E00566981 /* ContentView.swift */,
 				0FE4B9362B9052A6008CB61A /* classLocationSwiftUIView.swift */,
 				0FC738582B8DE7C400566981 /* Notifications.swift */,
 				0FE4B9322B903754008CB61A /* login */,
@@ -233,12 +235,13 @@
 		0FE4B9322B903754008CB61A /* login */ = {
 			isa = PBXGroup;
 			children = (
+				DFCC35F02B9FA01C0087BD00 /* AuthViewModel.swift */,
+				DF70D9532B9EF37F00461DF0 /* User.swift */,
+				DF70D95B2B9EFAD900461DF0 /* newPassword.swift */,
 				0FC738422B8DE6E800566981 /* myProfileView.swift */,
-				0FC738482B8DE6F800566981 /* ProfileInputView.swift */,
-				0FC738472B8DE6F800566981 /* ChangePasswordView.swift */,
+				DF70D9592B9EFAC200461DF0 /* ProfileInputView.swift */,
+				DF70D9552B9EF46000461DF0 /* signUpView.swift */,
 				0FC738462B8DE6F800566981 /* loginPageSwiftUIView.swift */,
-				0FC738452B8DE6F800566981 /* DeleteAccountView.swift */,
-				0FC738442B8DE6F800566981 /* signUpSwiftUIView.swift */,
 				0FC7384E2B8DE71200566981 /* profileCard.swift */,
 			);
 			path = login;
@@ -276,9 +279,9 @@
 				0FA43A852B90832C000858CA /* FirebaseAuth */,
 				0FA43A872B90832C000858CA /* FirebaseDatabaseSwift */,
 				0FA43A892B90832C000858CA /* FirebaseFirestoreSwift */,
-				0FA43A8B2B90832C000858CA /* FirebaseFunctions */,
 				0FA43A8D2B90832C000858CA /* FirebaseInAppMessagingSwift-Beta */,
 				0FA43A8F2B90832C000858CA /* FirebaseRemoteConfigSwift */,
+				DF70D9572B9EF49800461DF0 /* FirebaseStorage */,
 			);
 			productName = "LinkTutor(T)";
 			productReference = 0FC7380B2B8DE67E00566981 /* LinkTutor(T).app */;
@@ -373,7 +376,7 @@
 			files = (
 				0FC738162B8DE67F00566981 /* Preview Assets.xcassets in Resources */,
 				0FC738132B8DE67F00566981 /* Assets.xcassets in Resources */,
-				0FA43A7E2B9082D3000858CA /* GoogleService-Info.plist in Resources */,
+				DFCC35F32B9FA0E60087BD00 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,29 +405,30 @@
 				0FC738432B8DE6E800566981 /* myProfileView.swift in Sources */,
 				0F3922682B8F20270019ECA5 /* addCoursePage.swift in Sources */,
 				0FC738592B8DE7C400566981 /* Notifications.swift in Sources */,
+				DF70D9542B9EF37F00461DF0 /* User.swift in Sources */,
 				0FC7384B2B8DE6F800566981 /* loginPageSwiftUIView.swift in Sources */,
 				0FC7385F2B8DE7D500566981 /* gradient header.swift in Sources */,
-				0FC7384A2B8DE6F800566981 /* DeleteAccountView.swift in Sources */,
 				0FE4B9372B9052A6008CB61A /* classLocationSwiftUIView.swift in Sources */,
 				0FC7383F2B8DE6D300566981 /* TeacherEnrolledClassCard.swift in Sources */,
 				0FC738112B8DE67E00566981 /* ContentView.swift in Sources */,
 				0FC7380F2B8DE67E00566981 /* LinkTutor_T_App.swift in Sources */,
 				0FC738552B8DE77B00566981 /* header.swift in Sources */,
-				0FC738492B8DE6F800566981 /* signUpSwiftUIView.swift in Sources */,
 				0FC738672B8DE88000566981 /* classMockData.swift in Sources */,
-				0FC7384D2B8DE6F800566981 /* ProfileInputView.swift in Sources */,
-				0FC7384C2B8DE6F800566981 /* ChangePasswordView.swift in Sources */,
+				DF70D95A2B9EFAC200461DF0 /* ProfileInputView.swift in Sources */,
 				0FC738632B8DE7D500566981 /* accentHeader.swift in Sources */,
 				0FC738652B8DE7F400566981 /* sectionHeader.swift in Sources */,
 				0FC7384F2B8DE71200566981 /* profileCard.swift in Sources */,
 				0FC7383B2B8DE6B800566981 /* TeacherHomePage.swift in Sources */,
 				0FC738532B8DE74D00566981 /* listClassesScreeenModel().swift in Sources */,
+				DF70D95C2B9EFAD900461DF0 /* newPassword.swift in Sources */,
 				0FC738412B8DE6DC00566981 /* TeacherEnrolledClassList.swift in Sources */,
 				0FC738612B8DE7D500566981 /* accentClassViewHeader.swift in Sources */,
 				0FC738392B8DE6A400566981 /* appFonts.swift in Sources */,
 				0FC738572B8DE78500566981 /* navBar.swift in Sources */,
 				0FC738602B8DE7D500566981 /* accentLongHeader.swift in Sources */,
 				0FC738622B8DE7D500566981 /* popularClassCard.swift in Sources */,
+				DFCC35F12B9FA01C0087BD00 /* AuthViewModel.swift in Sources */,
+				DF70D9562B9EF46000461DF0 /* signUpView.swift in Sources */,
 				0F2EF9922B90845600CFE747 /* teachersTimetableSwiftUIView.swift in Sources */,
 				0FC7383D2B8DE6C500566981 /* TeacherEnrolledClasses.swift in Sources */,
 				0FC738512B8DE73A00566981 /* enrolledClassDataM.swift in Sources */,
@@ -789,11 +793,6 @@
 			package = 0FA43A7F2B908306000858CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
 		};
-		0FA43A8B2B90832C000858CA /* FirebaseFunctions */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0FA43A7F2B908306000858CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFunctions;
-		};
 		0FA43A8D2B90832C000858CA /* FirebaseInAppMessagingSwift-Beta */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0FA43A7F2B908306000858CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -803,6 +802,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0FA43A7F2B908306000858CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfigSwift;
+		};
+		DF70D9572B9EF49800461DF0 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0FA43A7F2B908306000858CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

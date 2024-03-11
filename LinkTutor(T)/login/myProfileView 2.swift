@@ -4,8 +4,7 @@
 //
 //  Created by Vikashini G on 31/01/24.
 //
-
-
+//
 import SwiftUI
 
 struct myProfileView: View {
@@ -34,7 +33,7 @@ struct myProfileView: View {
                     
                     if let user = viewModel.currentUser {
                         VStack(alignment: .leading){
-                            Text(user.fullName)
+                             Text(user.fullName)
                                 .font(AppFont.mediumSemiBold)
                                 .foregroundStyle(Color.black)
                             Text(user.email)
@@ -104,7 +103,7 @@ struct myProfileView: View {
                     } label: {
                         Text("Logout")
                             .font(AppFont.mediumSemiBold)
-                            .foregroundStyle(Color.black)
+                            .foregroundStyle(Color.text)
                             .frame(width: 200, height: 35)
                             .padding()
                             .background(Color.elavated)
@@ -124,7 +123,11 @@ struct myProfileView: View {
 }
 
 #Preview {
-     myProfileView()
-              .environmentObject(AuthViewModel())
+    let viewModel = AuthViewModel()
+          viewModel.currentUser = User(id: "mockUserID", fullName: "John Doe", email: "john@example.com")
+          
+          return myProfileView()
+              .environmentObject(viewModel)
 }
+
 

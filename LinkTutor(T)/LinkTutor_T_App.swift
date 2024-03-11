@@ -10,8 +10,10 @@ import Firebase
 
 @main
 struct LinkTutor_T_App: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var viewModel = AuthViewModel()
+   // @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     init(){
+        FirebaseApp.configure()
         if #available(iOS 15.0, *) {
             let appearance = UITabBarAppearance()
             appearance.selectionIndicatorTintColor = UIColor.green
@@ -21,7 +23,8 @@ struct LinkTutor_T_App: App {
     }
     var body: some Scene {
         WindowGroup {
-            TeacherHomePage()
+            ContentView()
+                .environmentObject(viewModel)
         }
     }
 }

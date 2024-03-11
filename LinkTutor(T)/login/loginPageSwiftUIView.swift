@@ -1,140 +1,123 @@
 import SwiftUI
+import FirebaseAuth
 
-struct LoginView: View {
-    @State private var username = ""
-    @State private var password = ""
-    @State private var isLoginButtonDisabled = true
-    @State private var isLoggedIn = false // Track login state
-    @State private var isActive: Bool = false // Track navigation state
-    @State private var isLoggingIn = false // Track login process
+struct loginView: View {
     
+    @State private var email = ""
+    @State private var password = ""
+
+    @EnvironmentObject var viewModel : AuthViewModel
+    
+   
     var body: some View {
-        
-        ZStack{
-            VStack {
-                ZStack{
-//                    RoundedRectangle(cornerRadius: 30, style: .continuous)
-//                        .fill(Color.accent) // Use the color you want for the rounded rectangle
-//                        .frame(height:300) // Set the height you want for the rounded rectangle
-                    
-                    VStack(alignment: .center){
-                        
+        NavigationView{
+                VStack{
+                    //Linktutor
+                    VStack(alignment: .leading){
                         Text("LinkTutor")
                             .fontWeight(.bold)
                             .font(.system(size: 70).weight(.bold))
                             .fontDesign(.rounded)
-                            .foregroundColor(.maroonRed)
-                            
-                        
                         Text("To find your next tutor")
                             .fontWeight(.bold)
-                            .font(AppFont.smallReg)
-                            .foregroundColor(.maroonRed)
+                            .font(AppFont.mediumReg)
+                            .foregroundColor(.accent)
                             .padding(.bottom,25)
-                        
-                        HStack{
-                            Button(action: {
-                                // Add your SignUp action here
-                                print("Login Tapped!")
-                            }) {
-                                Text("Login")
-                                    .fontWeight(.bold)
-                                    .font(AppFont.smallReg)
-                                    .foregroundColor(.maroonRed)
-                            }
-                            .disabled(isLoggingIn) // Disable the button while logging in
-                            .overlay(
-                                Group {
-                                    if isLoggingIn {
-                                        ProgressView() // Show an activity indicator while logging in
-                                    }
-                                }
-                            )
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                // Add your SignUp action here
-                                print("SignUp Tapped!")
-                            }) {
-                                Text("SignUp")
-                                    .fontWeight(.bold)
-                                    .font(AppFont.smallReg)
-                                    .foregroundColor(.maroonRed)
-                            }
+                    }
+                    .offset(y: 60)
+                    
+                    //login and signup option
+                    HStack{
+                        VStack{
+                            Text("Login")
+                                .font(AppFont.mediumSemiBold)
+                            Rectangle()
+                                .frame(width: 100, height: 3)
+                                .foregroundStyle(Color.accent)
                         }
-                        .padding([.leading, .trailing], 70)
-                        .padding(.top,80)
-                        
-                    }
-                }
-                
-                TextField("Username", text: $username)
-                    .padding()
-                    .background(Color(UIColor.systemGray5))
-                    .cornerRadius(8)
-                    .padding(10)
-                
-                SecureField("Password", text: $password)
-                    .padding()
-                    .background(Color(UIColor.systemGray5))
-                    .cornerRadius(8)
-                    .padding(10)
-                
-                Button(action: {
-                    // Add your login authentication logic here
-                    // For simplicity, this example always considers login successful
-                    isLoggingIn.toggle()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        // Simulate a delay for the login process
-                        isLoggedIn = true
-                        isLoginButtonDisabled.toggle()
-                        isActive = true
-                        isLoggingIn.toggle()
-                    }
-                }) {
-                    Text("Login")
-                        .frame(width: 200, height:15)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .shadow(color: .black.opacity(0.1), radius: 10 , x: 0 , y: 12)
-                }
-                .disabled(isLoginButtonDisabled || isLoggingIn) // Disable the button while logging in
-                .overlay(
-                    Group {
-                        if isLoggingIn {
-                            ProgressView() // Show an activity indicator while logging in
+                        Spacer()
+                        VStack{
+                            NavigationLink(destination: signUpView()){
+                                Text("Sign up")
+                                    .font(AppFont.mediumSemiBold)
+                                    .foregroundColor(.black)
+                            }
+                            Rectangle()
+                                .frame(width: 100, height: 3)
+                                .foregroundStyle(Color.clear)
                         }
                     }
-                )
-                
-                Spacer()
-            }
-            .background(
-                VStack{
-                    accentClassViewHeader()
-                        .edgesIgnoringSafeArea(.top)
-                        .offset(y: -150)
+                    .padding(.horizontal, 50)
+                    .offset(y: 130)
+                    
+                    //login details
+                    List{
+                        VStack(alignment: .leading){
+                            Text("Email address")
+                                .font(AppFont.mediumReg)
+                                .padding(.leading, 10)
+                            TextField("Email addresss", text: $email)
+                                .listRowBackground(Color.background)
+                                .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                                .textFieldStyle(.plain)
+                                .cornerRadius(8)
+                                .padding(10)
+                        }
+                        .listRowBackground(Color.clear)
+                        VStack(alignment: .leading){
+                            Text("Password")
+                                .font(AppFont.mediumReg)
+                                .padding(.leading, 10)
+                            SecureField("Password", text: $password)
+                                .cornerRadius(8)
+                                .padding(10)
+                        }
+                        .padding(.top)
+                        .listRowBackground(Color.clear)
+                    }
+                    .padding(.top, 20)
+                    .offset(y: 150)
+                    .listStyle(PlainListStyle())
+                    
+                    //button
+                    Button {
+                        Task {
+                           try await viewModel.signIn(withEmail: email, password: password)
+                        }
+                        
+                    } label :{
+                        
+                        Text("Login")
+                            .font(AppFont.mediumSemiBold)
+                            .foregroundColor(.black)
+                    }
+                    .frame(width: 250, height: 35)
+                    .padding()
+                    .disabled(!FormIsValid)
+                    .opacity(FormIsValid ? 1.0 : 0.5)
+                    .background(Color.accent)
+                    .cornerRadius(50)
                     Spacer()
                 }
-            )
-            .background(Color.background)
-            .navigationTitle("Login")
+                .padding()
+                .background(Color.background)
+                .environment(\.colorScheme, .dark)
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
-struct HomeView: View {
-    var body: some View {
-        Text("Welcome to the Home Page!")
-            .navigationBarTitle("Home", displayMode: .inline)
-    }
+#Preview {
+    loginView()
 }
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
+extension loginView: AuthenticationFormProtocol {
+    var FormIsValid: Bool {
+        return !email.isEmpty
+        && email.contains("@")
+        && !password.isEmpty
+        && password.count > 5
     }
 }
+    
+

@@ -58,7 +58,7 @@
 
 import SwiftUI
 import UserNotifications
-import EventKit
+
 
 struct TimeTableCardSwiftUIView: View {
     var className: String

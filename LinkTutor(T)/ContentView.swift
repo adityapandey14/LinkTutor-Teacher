@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var viewModel : AuthViewModel
     var body: some View {
-        TabView{
-            TeacherHomePage()
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                }
-            
+        Group {
+            if viewModel.userSession != nil {
+                TeacherHomePage()
+            } else {
+                loginView()
+            }
         }
+       
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(AuthViewModel())
+        
 }
