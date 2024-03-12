@@ -106,6 +106,7 @@ class AuthViewModel: ObservableObject {
         Task{
             
             await fetchUser()
+            
         }
        Auth.auth().currentUser?.updatePassword(to: password) { err in
             if let err = err {
@@ -128,11 +129,16 @@ class AuthViewModel: ObservableObject {
     }
     
     //To add Course Data
-     func addCourseData(skillType: String, academyName: String, className: String, mode: String, fees: String, week: [String], startTime: String, endTime: String, teacherUid: String) {
+     func addCourseData(skillType: String, academyName: String, className: String, mode: String, fees: Int, week: [String], startTime: String, endTime: String) {
         
          let skill = skillType.lowercased()
          let db = Firestore.firestore()
          
+         Task{
+             
+             await fetchUser()
+         }
+         let userId = Auth.auth().currentUser!.uid
          // Create a dictionary representing the data to be added
          let data: [String: Any] = [
              "academy": academyName,
@@ -143,14 +149,15 @@ class AuthViewModel: ObservableObject {
              "week": week,
              "startTime": startTime,
              "endTime": endTime,
-             "teacherUid": teacherUid
+             "teacherUid": userId
          ]
          
          // Add the document to the "skillType" collection with skillType as the document ID
-         db.collection("skillType").document(skill).collection("skillOwnerDetails").document("5").setData(data) { error in
+         db.collection("skillType").document(skill).collection("skillOwnerDetails").addDocument(data: data){ error in
              if let error = error {
                  print("Error adding document: \(error.localizedDescription)")
              } else {
+                // TeacherHomePage()
                  print("Document added successfully to skillType collection with ID: \(skillType)")
              }
          }
