@@ -13,7 +13,7 @@ struct TeacherHomePage: View{
    
     
     var body: some View{
-        NavigationStack{
+        NavigationView {
             VStack{
                 VStack{
                     VStack{

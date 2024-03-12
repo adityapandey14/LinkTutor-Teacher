@@ -194,9 +194,8 @@
 				DF77D2DB2BA0233D000F92D5 /* courseRelated */,
 				0F2EF9912B90845600CFE747 /* teachersTimetableSwiftUIView.swift */,
 				0F2EF9932B90853300CFE747 /* TimeTableCardSwiftUIView.swift */,
-				0FE4B9352B90450A008CB61A /* TeacherEnrolledClasses */,
-				0FC738522B8DE74D00566981 /* listClassesScreeenModel().swift */,
 				0FE4B9362B9052A6008CB61A /* classLocationSwiftUIView.swift */,
+				0FE4B9352B90450A008CB61A /* TeacherEnrolledClasses */,
 				0FC738582B8DE7C400566981 /* Notifications.swift */,
 				0FE4B9322B903754008CB61A /* login */,
 				0FC738542B8DE77B00566981 /* header.swift */,
@@ -261,6 +260,7 @@
 				0FC7383C2B8DE6C500566981 /* TeacherEnrolledClasses.swift */,
 				0FC7383E2B8DE6D300566981 /* TeacherEnrolledClassCard.swift */,
 				0FC738402B8DE6DC00566981 /* TeacherEnrolledClassList.swift */,
+				0FC738522B8DE74D00566981 /* listClassesScreeenModel().swift */,
 			);
 			path = TeacherEnrolledClasses;
 			sourceTree = "<group>";

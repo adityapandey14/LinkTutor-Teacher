@@ -61,16 +61,18 @@ struct enrolledClassCard: View{
                             }
                         }
                         
-                        Button(action: {
-                            // Delete button action
-                            skillViewModel.deleteOwnerDetails(documentId: documentId)
-                            
-                        }) {
-                            Text("Delete")
-                                .frame(minWidth: 90, minHeight: 30)
-                                .background(Color.red)
-                                .foregroundColor(.white)
-                                .cornerRadius(8.0)
+                        NavigationLink(destination : TeacherHomePage()){
+                            Button(action: {
+                                // Delete button action
+                                skillViewModel.deleteOwnerDetails(documentId: documentId)
+                                
+                            }) {
+                                Text("Delete")
+                                    .frame(minWidth: 90, minHeight: 30)
+                                    .background(Color.red)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(8.0)
+                            }
                         }
                     }
                 }

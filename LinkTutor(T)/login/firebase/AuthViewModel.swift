@@ -23,6 +23,7 @@ class AuthViewModel: ObservableObject {
     @Published var userSession : FirebaseAuth.User?
     
     
+    
     // This is our user
     @Published var currentUser: User?
     
@@ -126,6 +127,7 @@ class AuthViewModel: ObservableObject {
     
     func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }
+        
         //If there is data it will go and fetch data if there is not then it will return will wasting api calls
         guard let snapshot = try? await Firestore.firestore().collection("Teachers").document(uid).getDocument() else { return }
         self.currentUser = try? snapshot.data(as: User.self)
@@ -228,23 +230,7 @@ class AuthViewModel: ObservableObject {
     
     
 
-    func getUserID() -> String? {
-         return Auth.auth().currentUser?.uid
-     }
-     
-     func getUserIDAsync(completion: @escaping (String?) -> Void) {
-         if let userID = Auth.auth().currentUser?.uid {
-             completion(userID)
-         } else {
-             Auth.auth().addStateDidChangeListener { auth, user in
-                 if let user = user {
-                     completion(user.uid)
-                 } else {
-                     completion(nil)
-                 }
-             }
-         }
-     }
+
  
 
 }

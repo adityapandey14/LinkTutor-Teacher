@@ -14,6 +14,7 @@ import FirebaseFirestore
 struct enrolledClassCardList: View {
     @ObservedObject var skillViewModel = SkillViewModel()
     @EnvironmentObject var viewModel: AuthViewModel
+    @State var userId : String = Auth.auth().currentUser?.uid as? String ?? ""
  
     
     var body: some View {
@@ -21,30 +22,33 @@ struct enrolledClassCardList: View {
             ScrollView {
                 
                 ForEach(skillViewModel.skillTypes) { skillType in
-                    VStack(alignment: .leading) {
-                       
+                    VStack {
                         
-                        ForEach(skillType.skillOwnerDetails) { detail in
-                            if detail.teacherUid == "7poyqhviIHOvEYKau5S8zwiuko42" {
-                                VStack(alignment: .leading) {
-                                    
-                                    enrolledClassCard(documentId: detail.id,
-                                                      className: detail.className,
-                                                      days: detail.week,
-                                                      startTime: detail.startTime,
-                                                      endTime: detail.endTime)
-                                    // Add other fields as needed
+                        VStack(alignment: .leading) {
+                            
+                            // let userId = Auth.auth().currentUser
+                            ForEach(skillType.skillOwnerDetails) { detail in
+                                if detail.teacherUid == userId {
+                                    VStack(alignment: .leading) {
+                                        
+                                        enrolledClassCard(documentId: detail.id,
+                                                          className: detail.className,
+                                                          days: detail.week,
+                                                          startTime: detail.startTime,
+                                                          endTime: detail.endTime)
+                                        // Add other fields as needed
+                                    }
+                                    .padding()
                                 }
-                                .padding()
                             }
                         }
+                        .onAppear() {
+                            
+                            // await viewModel.fetchUser()
+                            skillViewModel.fetchSkillOwnerDetails(for: skillType)
+                        }
                     }
-                    .onAppear() {
-                        
-                        // await viewModel.fetchUser()
-                        skillViewModel.fetchSkillOwnerDetails(for: skillType)
-                    }
-                    .padding()
+                    
                     
                 }
             }
