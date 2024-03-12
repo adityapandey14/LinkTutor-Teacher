@@ -9,7 +9,7 @@ struct TeacherHomePage: View{
 //    }
 
     @StateObject var viewModel = listClassesScreenModel()
-    @State private var isShowingFilterViewPopup = false
+    @State var isShowingFilterViewPopup = false
    
     
     var body: some View{

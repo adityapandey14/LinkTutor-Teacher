@@ -20,10 +20,7 @@ struct ProfileInputView: View {
     @State private var isProfileIsSubmit = false
     
     var body: some View {
-        NavigationLink(destination: TeacherHomePage(), isActive: $isProfileIsSubmit) {
-            EmptyView()
-        }
-        .hidden()
+       
         NavigationStack{
             
             VStack {
@@ -73,6 +70,7 @@ struct ProfileInputView: View {
                         // Email TextField
                         TextField("Email Address", text: $email)
                             .listRowBackground(Color.elavated)
+                            .autocapitalization(.none)
                         
                         TextField("City", text: $city)
                             .listRowBackground(Color.elavated)
@@ -96,31 +94,34 @@ struct ProfileInputView: View {
                 }
                 .listStyle(.plain)
                 .background(.clear)
-                
-                // Submit Button
-                Button(action: {
-                    // Handle add class action
-                    viewModel.updateTeacherProfile(fullName: fullName,
-                                                   email: email,
-                                                   aboutParagraph: about,
-                                                   age: age,
-                                                   city: city,
-                                                   imageUrl: imageUrl,
-                                                   location: location,
-                                                   occupation: occupation,
-                                                   phoneNumber: phoneNumber)
-                    // Activate the navigation to TeacherHomePage
-                    
-                    
-                    isProfileIsSubmit = true
-                }) {
-                    Text("Submit Profile")
-                        .foregroundColor(.white)
-                        .font(AppFont.mediumSemiBold)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(20)
+                NavigationLink(destination: TeacherHomePage(), isActive: $isProfileIsSubmit) {
+                    Button(action: {
+                        // Handle add class action
+                        viewModel.updateTeacherProfile(fullName: fullName,
+                                                       email: email,
+                                                       aboutParagraph: about,
+                                                       age: age,
+                                                       city: city,
+                                                       imageUrl: imageUrl,
+                                                       location: location,
+                                                       occupation: occupation,
+                                                       phoneNumber: phoneNumber)
+                        // Activate the navigation to TeacherHomePage
+                        
+                        
+                        isProfileIsSubmit = true
+                    }) {
+                        Text("Submit Profile")
+                            .foregroundColor(.white)
+                            .font(AppFont.mediumSemiBold)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(20)
+                    }
                 }
+               
+                // Submit Button
+               
                 
             } //v end
             .background(Color.background)

@@ -1,11 +1,3 @@
-//
-//  myProfileView.swift
-//  linkTutor
-//
-//  Created by Vikashini G on 31/01/24.
-//
-
-
 import SwiftUI
 
 struct myProfileView: View {
@@ -15,7 +7,7 @@ struct myProfileView: View {
     
     
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack(alignment: .leading){
                 HStack{
                     Text("My Profile")
@@ -118,13 +110,16 @@ struct myProfileView: View {
                 Spacer()
             }
             .padding()
-            .background(Color.background)
+           
         }
     }
 }
 
 #Preview {
-     myProfileView()
-              .environmentObject(AuthViewModel())
+    let viewModel = AuthViewModel()
+          viewModel.currentUser = User(id: "mockUserID", fullName: "John Doe", email: "john@example.com")
+          
+          return myProfileView()
+              .environmentObject(viewModel)
 }
 

@@ -28,6 +28,14 @@ final class listClassesScreenModel : ObservableObject {
         }
     }
     
+    var updateCourseFramework : updateCourse?
+    {
+        didSet{
+            isShowingDetailView = true
+        }
+    }
+    
+    
   
   
     init(isShowingDetailView: Bool = false) {

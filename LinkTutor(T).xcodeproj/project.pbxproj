@@ -45,6 +45,9 @@
 		0FC738652B8DE7F400566981 /* sectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738642B8DE7F400566981 /* sectionHeader.swift */; };
 		0FC738672B8DE88000566981 /* classMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738662B8DE88000566981 /* classMockData.swift */; };
 		0FE4B9372B9052A6008CB61A /* classLocationSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE4B9362B9052A6008CB61A /* classLocationSwiftUIView.swift */; };
+		DF283B142BA0801A0061FF83 /* enrolledClassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF283B132BA0801A0061FF83 /* enrolledClassCard.swift */; };
+		DF283B162BA086680061FF83 /* enrolledClassCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF283B152BA086680061FF83 /* enrolledClassCardList.swift */; };
+		DF283B182BA097700061FF83 /* updateCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF283B172BA0976F0061FF83 /* updateCourse.swift */; };
 		DF70D9542B9EF37F00461DF0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D9532B9EF37F00461DF0 /* User.swift */; };
 		DF70D9562B9EF46000461DF0 /* signUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D9552B9EF46000461DF0 /* signUpView.swift */; };
 		DF70D9582B9EF49800461DF0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DF70D9572B9EF49800461DF0 /* FirebaseStorage */; };
@@ -107,6 +110,9 @@
 		0FC738642B8DE7F400566981 /* sectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sectionHeader.swift; sourceTree = "<group>"; };
 		0FC738662B8DE88000566981 /* classMockData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classMockData.swift; sourceTree = "<group>"; };
 		0FE4B9362B9052A6008CB61A /* classLocationSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classLocationSwiftUIView.swift; sourceTree = "<group>"; };
+		DF283B132BA0801A0061FF83 /* enrolledClassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enrolledClassCard.swift; sourceTree = "<group>"; };
+		DF283B152BA086680061FF83 /* enrolledClassCardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enrolledClassCardList.swift; sourceTree = "<group>"; };
+		DF283B172BA0976F0061FF83 /* updateCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updateCourse.swift; sourceTree = "<group>"; };
 		DF70D9532B9EF37F00461DF0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/linkTutor/linkTutor/Screens/LoginSignUp/DataModel/User.swift"; sourceTree = "<group>"; };
 		DF70D9552B9EF46000461DF0 /* signUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = signUpView.swift; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/linkTutor/linkTutor/Screens/LoginSignUp/signUpView.swift"; sourceTree = "<group>"; };
 		DF70D9592B9EFAC200461DF0 /* ProfileInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInputView.swift; sourceTree = "<group>"; };
@@ -263,7 +269,10 @@
 			isa = PBXGroup;
 			children = (
 				0F3922672B8F20270019ECA5 /* addCoursePage.swift */,
+				DF283B132BA0801A0061FF83 /* enrolledClassCard.swift */,
+				DF283B152BA086680061FF83 /* enrolledClassCardList.swift */,
 				DF860EFA2BA0515C00373BA1 /* skillType.swift */,
+				DF283B172BA0976F0061FF83 /* updateCourse.swift */,
 			);
 			path = courseRelated;
 			sourceTree = "<group>";
@@ -421,6 +430,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F2EF9942B90853300CFE747 /* TimeTableCardSwiftUIView.swift in Sources */,
+				DF283B162BA086680061FF83 /* enrolledClassCardList.swift in Sources */,
 				0FC738432B8DE6E800566981 /* myProfileView.swift in Sources */,
 				0F3922682B8F20270019ECA5 /* addCoursePage.swift in Sources */,
 				0FC738592B8DE7C400566981 /* Notifications.swift in Sources */,
@@ -438,6 +448,7 @@
 				0FC738632B8DE7D500566981 /* accentHeader.swift in Sources */,
 				0FC738652B8DE7F400566981 /* sectionHeader.swift in Sources */,
 				0FC7384F2B8DE71200566981 /* profileCard.swift in Sources */,
+				DF283B182BA097700061FF83 /* updateCourse.swift in Sources */,
 				0FC7383B2B8DE6B800566981 /* TeacherHomePage.swift in Sources */,
 				0FC738532B8DE74D00566981 /* listClassesScreeenModel().swift in Sources */,
 				DF70D95C2B9EFAD900461DF0 /* newPassword.swift in Sources */,
@@ -451,6 +462,7 @@
 				DF70D9562B9EF46000461DF0 /* signUpView.swift in Sources */,
 				0F2EF9922B90845600CFE747 /* teachersTimetableSwiftUIView.swift in Sources */,
 				0FC7383D2B8DE6C500566981 /* TeacherEnrolledClasses.swift in Sources */,
+				DF283B142BA0801A0061FF83 /* enrolledClassCard.swift in Sources */,
 				0FC738512B8DE73A00566981 /* enrolledClassDataM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

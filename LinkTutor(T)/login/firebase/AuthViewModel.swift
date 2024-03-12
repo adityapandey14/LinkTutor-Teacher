@@ -34,6 +34,8 @@ class AuthViewModel: ObservableObject {
     }
     
     
+    
+    
     func signIn(withEmail email: String , password: String) async throws {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
@@ -43,6 +45,8 @@ class AuthViewModel: ObservableObject {
             print("DEBUG: Failed to log in with error \(error.localizedDescription)")
         }
     }
+    
+    
     
     func createUser(withEmail email : String , password: String , fullName: String ) async throws {
         do {
@@ -86,7 +90,7 @@ class AuthViewModel: ObservableObject {
                     } else {
                         print("Deleted user in db users")
                         SkillViewModel().deleteOwnerDetails()
-                        Storage.storage().reference(forURL: "gs://myapp.appspot.com").child("users").child(userId).delete() { err in
+                        Storage.storage().reference(forURL: "gs://myapp.appspot.com").child("Teachers").child(userId).delete() { err in
                             if let err = err {
                                 print("error: \(err)")
                             } else {
@@ -123,7 +127,7 @@ class AuthViewModel: ObservableObject {
     func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         //If there is data it will go and fetch data if there is not then it will return will wasting api calls
-        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
+        guard let snapshot = try? await Firestore.firestore().collection("Teachers").document(uid).getDocument() else { return }
         self.currentUser = try? snapshot.data(as: User.self)
         
         
@@ -190,8 +194,58 @@ class AuthViewModel: ObservableObject {
     }
     
     
+    func updateCourseData(skillType: String, academyName: String, className: String, mode: String, fees: Int, week: [String], startTime: String, endTime: String, documentId: String) {
+        let skill = skillType.lowercased()
+        let db = Firestore.firestore()
+        
+        Task {
+            await fetchUser()
+        }
+        let userId = Auth.auth().currentUser!.uid
+        
+        // Create a dictionary representing the updated data
+        let updatedData: [String: Any] = [
+            "academy": academyName,
+            "className": className,
+            "mode": mode,
+            "skillUid": skillType,
+            "fees": fees,
+            "week": week,
+            "startTime": startTime,
+            "endTime": endTime,
+            "teacherUid": userId
+        ]
+        
+        // Update the document in the "skillOwnerDetails" collection with the provided documentId
+        db.collection("skillType").document(skill).collection("skillOwnerDetails").document(documentId).setData(updatedData, merge: true) { error in
+            if let error = error {
+                print("Error updating document: \(error.localizedDescription)")
+            } else {
+                print("Document updated successfully")
+            }
+        }
+    }
+    
     
 
+    func getUserID() -> String? {
+         return Auth.auth().currentUser?.uid
+     }
+     
+     func getUserIDAsync(completion: @escaping (String?) -> Void) {
+         if let userID = Auth.auth().currentUser?.uid {
+             completion(userID)
+         } else {
+             Auth.auth().addStateDidChangeListener { auth, user in
+                 if let user = user {
+                     completion(user.uid)
+                 } else {
+                     completion(nil)
+                 }
+             }
+         }
+     }
+ 
 
 }
 

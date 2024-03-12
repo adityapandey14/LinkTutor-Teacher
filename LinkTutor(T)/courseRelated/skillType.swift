@@ -34,6 +34,8 @@ struct SkillOwnerDetail: Identifiable, Codable {
     var startTime : String
     var endTime : String
     var mode : String
+    
+    
 }
 
 // Create a view model to fetch the data
@@ -188,6 +190,73 @@ class SkillViewModel: ObservableObject {
     }
 //end of the funtion
     
+    
+    func deleteOwnerDetails(documentId: String) {
+        let db = Firestore.firestore()
+        
+        Task {
+             fetchSkillTypes()
+            await viewModel.fetchUser()
+        }
+        let userId = Auth.auth().currentUser!.uid
+        
+        db.collection("skillType").getDocuments { snapshot, error in
+            if let error = error {
+                print("Error fetching skill types: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let documents = snapshot?.documents else {
+                print("No skill types found")
+                return
+            }
+            
+            for document in documents {
+                db.collection("skillType").document(document.documentID).collection("skillOwnerDetails").getDocuments { querySnapshot, error in
+                    if let error = error {
+                        print("Error fetching skill owner details: \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    guard let detailsDocuments = querySnapshot?.documents else {
+                        print("No skill owner details found")
+                        return
+                    }
+                    
+                    let details = detailsDocuments.compactMap { document -> SkillOwnerDetail? in
+                        let data = document.data()
+                        return SkillOwnerDetail(
+                            id: document.documentID,
+                            academy: data["academy"] as? String ?? "",
+                            className: data["className"] as? String ?? "",
+                            documentUid: data["documentUid"] as? String ?? "",
+                            price: data["price"] as? Double ?? 0,
+                            skillUid: data["skillUid"] as? String ?? "",
+                            teacherUid: data["teacherUid"] as? String ?? "",
+                            week: data["week"] as? [String] ?? [],
+                            startTime: data["startTime"] as? String ?? "",
+                            endTime: data["endTime"] as? String ?? "",
+                            mode: data["mode"] as? String ?? ""
+                        )
+                    }
+                    
+                    DispatchQueue.main.async {
+                        for detail in details where detail.teacherUid == userId && detail.id == documentId {
+                            db.collection("skillType").document(document.documentID)
+                                .collection("skillOwnerDetails").document(detail.id).delete() { error in
+                                    if let error = error {
+                                        print("Error deleting document: \(error.localizedDescription)")
+                                    } else {
+                                        print("Document deleted successfully")
+                                    }
+                                }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
 }
 
@@ -211,7 +280,7 @@ struct skillTypeView: View {
                     
                   
                     
-                    ForEach(skillType.skillOwnerDetails) { detail in
+                    ForEach(skillType.skillOwnerDetails.filter { $0.teacherUid == "1"  }) { detail in
                         VStack(alignment: .leading) {
                             Text("Class Name: \(detail.className)")
                                 .padding()
@@ -222,6 +291,8 @@ struct skillTypeView: View {
                             Text("week: \(detail.week)")
                                 .padding()
                                 .foregroundColor(.red)
+                            
+                            enrolledClassCard(documentId: detail.id, className: detail.className, days: detail.week, startTime: detail.startTime, endTime: detail.endTime)
                             // Add other fields as needed
                         }
                     }
@@ -231,6 +302,9 @@ struct skillTypeView: View {
         }
     }
 }
+
+
+
 
 #Preview {
     skillTypeView()
