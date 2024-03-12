@@ -1,119 +1,144 @@
 import SwiftUI
+import Firebase
 
 struct ProfileInputView: View {
     
+    @EnvironmentObject var viewModel: AuthViewModel
+    
     @State private var image: Image?
-    @State private var name: String = ""
+    @State private var fullName: String = ""
     @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var phoneNumber: String = ""
+    @State private var city: String = ""
+    @State private var phoneNumber: Int = 91
     @State private var about: String = ""
+    @State private var occupation : String = ""
+    @State private var age : String = ""
+    @State private var imageUrl : String = "teacherStockPhoto.jpg"
+    @State private var location: GeoPoint = GeoPoint(latitude: 12.8096, longitude: 80.8097)
+    
     @State private var showImagePicker: Bool = false
+    @State private var isProfileIsSubmit = false
     
     var body: some View {
-        
-                VStack {
-                    VStack{
-                        HStack{
-                            Text("Edit Profile ")
-                                .font(AppFont.largeBold)
-                            Spacer()
-                        }
-                        // Profile Photo
-//                            if let image = image {
-//                                image
-//                                    .resizable()
-//                                    .scaledToFit()
-//                                    .frame(width: 100, height: 100)
-//                                    .cornerRadius(50.0)
-//                            } else {
-//                                Image(systemName: "person.circle.fill")
-//                                    .resizable()
-//                                    .foregroundColor(.gray)
-//                                    .frame(width: 90, height: 90)
-//                                    .cornerRadius(50.0)
-//
-//                            }
-                            
-                        Button(action: {
-                                showImagePicker = true
-                        }) {
-                            if let image = image {
-                                image
-                                    .resizable()
-                                    
-                                    .frame(width: 100, height: 100)
-                                    .cornerRadius(50.0)
-                            } else {
-                                Image(systemName: "person.circle.fill")
-                                    .resizable()
-                                    .foregroundColor(.gray)
-                                    .frame(width: 90, height: 90)
-                                    .cornerRadius(50.0)
-                            
-                            }
-                            //Text("Change profile photo").foregroundColor(.blue)
-                        }
-                        .sheet(isPresented: $showImagePicker) {
-                            ImagePicker(image: $image)
-                        }
+        NavigationLink(destination: TeacherHomePage(), isActive: $isProfileIsSubmit) {
+            EmptyView()
+        }
+        .hidden()
+        NavigationStack{
+            
+            VStack {
+                VStack{
+                    HStack{
+                        Text("Edit Profile ")
+                            .font(AppFont.largeBold)
+                        Spacer()
                     }
-                    .padding()
                     
-                    List{
-                        Section(header: Text("")){
-                            // Name TextField
-                            TextField("Name", text: $name)
-                            .listRowBackground(Color.elavated)
+                    
+                    Button(action: {
+                        showImagePicker = true
+                    }) {
+                        if let image = image {
+                            image
+                                .resizable()
                             
-                            // About TextField
-                            TextField("About", text: $about)
-                            .listRowBackground(Color.elavated)
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(50.0)
+                        } else {
+                            Image(systemName: "person.circle.fill")
+                                .resizable()
+                                .foregroundColor(.gray)
+                                .frame(width: 90, height: 90)
+                                .cornerRadius(50.0)
+                            
                         }
-                        Section(header: Text("")){
-                            // Email TextField
-                            TextField("Email Address", text: $email)
+                        //Text("Change profile photo").foregroundColor(.blue)
+                    }
+                    .sheet(isPresented: $showImagePicker) {
+                        ImagePicker(image: $image)
+                    }
+                }
+                .padding()
+                
+                List{
+                    Section(header: Text("")){
+                        // Name TextField
+                        TextField("Name", text: $fullName)
                             .listRowBackground(Color.elavated)
                         
-                            // Phone Number TextField
-                            TextField("Phone Number", text: $phoneNumber)
+                        // About TextField
+                        TextField("About", text: $about)
                             .listRowBackground(Color.elavated)
-                        }
-                        Section(header: Text("")){
-                            // Password SecureField
-                            SecureField("Password", text: $password)
+                        
+                        // Email TextField
+                        TextField("Email Address", text: $email)
                             .listRowBackground(Color.elavated)
-                        }
-                    }
-                    .listStyle(.plain)
-                    .background(.clear)
-                    
-                    // Submit Button
-                    Button(action: submitProfileData) {
-                        Text("Submit")
-                            .font(AppFont.mediumSemiBold)
-                            .foregroundStyle(Color.black)
-                            .frame(width: 200, height: 35)
-                            .padding()
-                            .background(Color.accent)
-                            .cornerRadius(50)
+                        
+                        TextField("City", text: $city)
+                            .listRowBackground(Color.elavated)
+                        
+                        
+                        
+                        TextField("Age", text: $age)
+                            .listRowBackground(Color.elavated)
+                        TextField("Occupation", text: $occupation)
+                            .listRowBackground(Color.elavated)
                     }
                     
-                } //v end
-                .background(Color.background)
-        
+                    Section(header: Text("Phone Number")){
+                        // Password SecureField
+                        TextField("PhoneNumber", value: $phoneNumber, formatter: NumberFormatter())
+                            .keyboardType(.numberPad)
+                    }
+                    
+                    
+                    
+                }
+                .listStyle(.plain)
+                .background(.clear)
+                
+                // Submit Button
+                Button(action: {
+                    // Handle add class action
+                    viewModel.updateTeacherProfile(fullName: fullName,
+                                                   email: email,
+                                                   aboutParagraph: about,
+                                                   age: age,
+                                                   city: city,
+                                                   imageUrl: imageUrl,
+                                                   location: location,
+                                                   occupation: occupation,
+                                                   phoneNumber: phoneNumber)
+                    // Activate the navigation to TeacherHomePage
+                    
+                    
+                    isProfileIsSubmit = true
+                }) {
+                    Text("Submit Profile")
+                        .foregroundColor(.white)
+                        .font(AppFont.mediumSemiBold)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(20)
+                }
+                
+            } //v end
+            .background(Color.background)
+            
+        }
     }
         
         func submitProfileData() {
             // Handle submission logic here
-            print("Name: \(name)")
+            print("Name: \(fullName)")
             print("Email: \(email)")
-            print("Password: \(password)")
+            print("City: \(city)")
             print("Phone Number: \(phoneNumber)")
             print("About: \(about)")
             // You can perform additional actions here, such as validation or sending data to a server.
         }
     }
+
 
 
 #Preview {

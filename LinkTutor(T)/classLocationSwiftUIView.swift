@@ -68,8 +68,8 @@
 //
 //struct MapViewExample_Previews: PreviewProvider {
 //    static var previews: some View {
-//        VStack{
-//            
-//        }
+//       MapViewExample()
 //    }
 //}
+
+

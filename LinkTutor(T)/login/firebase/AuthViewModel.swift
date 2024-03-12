@@ -102,6 +102,7 @@ class AuthViewModel: ObservableObject {
                     }
                 }
     }
+    
     func changePassword(password : String) {
         Task{
             
@@ -163,6 +164,30 @@ class AuthViewModel: ObservableObject {
          }
      }
  
+    
+    
+    func updateTeacherProfile(fullName : String , email : String , aboutParagraph : String , age : String , city : String , imageUrl : String , location: GeoPoint , occupation : String , phoneNumber : Int) {
+        let db = Firestore.firestore()
+        
+        Task{
+            
+            await fetchUser()
+        }
+        let userId = Auth.auth().currentUser!.uid
+        
+      
+        db.collection("Teachers").document(userId).setData([ "email" : email ,
+                                                             "fullName" : fullName ,
+                                                             "aboutParagraph" : aboutParagraph ,
+                                                             "age" : age ,
+                                                             "city" : city ,
+                                                             "imageUrl" : imageUrl ,
+                                                             "location" : location ,
+                                                             "occupation" : occupation,
+                                                             "phoneNumber" : phoneNumber] , merge : true)
+        
+    }
+    
     
 }
 

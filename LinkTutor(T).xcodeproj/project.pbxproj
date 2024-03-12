@@ -182,8 +182,8 @@
 				0FC738102B8DE67E00566981 /* ContentView.swift */,
 				0FC7380E2B8DE67E00566981 /* LinkTutor_T_App.swift */,
 				0FC7383A2B8DE6B800566981 /* TeacherHomePage.swift */,
-				0F3922672B8F20270019ECA5 /* addCoursePage.swift */,
 				DFCC35F22B9FA0E60087BD00 /* GoogleService-Info.plist */,
+				DF77D2DB2BA0233D000F92D5 /* courseRelated */,
 				0F2EF9912B90845600CFE747 /* teachersTimetableSwiftUIView.swift */,
 				0F2EF9932B90853300CFE747 /* TimeTableCardSwiftUIView.swift */,
 				0FE4B9352B90450A008CB61A /* TeacherEnrolledClasses */,
@@ -235,7 +235,7 @@
 		0FE4B9322B903754008CB61A /* login */ = {
 			isa = PBXGroup;
 			children = (
-				DFCC35F02B9FA01C0087BD00 /* AuthViewModel.swift */,
+				DF77D2DC2BA02365000F92D5 /* firebase */,
 				DF70D9532B9EF37F00461DF0 /* User.swift */,
 				DF70D95B2B9EFAD900461DF0 /* newPassword.swift */,
 				0FC738422B8DE6E800566981 /* myProfileView.swift */,
@@ -255,6 +255,22 @@
 				0FC738402B8DE6DC00566981 /* TeacherEnrolledClassList.swift */,
 			);
 			path = TeacherEnrolledClasses;
+			sourceTree = "<group>";
+		};
+		DF77D2DB2BA0233D000F92D5 /* courseRelated */ = {
+			isa = PBXGroup;
+			children = (
+				0F3922672B8F20270019ECA5 /* addCoursePage.swift */,
+			);
+			path = courseRelated;
+			sourceTree = "<group>";
+		};
+		DF77D2DC2BA02365000F92D5 /* firebase */ = {
+			isa = PBXGroup;
+			children = (
+				DFCC35F02B9FA01C0087BD00 /* AuthViewModel.swift */,
+			);
+			path = firebase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
