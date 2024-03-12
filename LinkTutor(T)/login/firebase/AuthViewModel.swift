@@ -85,6 +85,7 @@ class AuthViewModel: ObservableObject {
                         print("error: \(err)")
                     } else {
                         print("Deleted user in db users")
+                        SkillViewModel().deleteOwnerDetails()
                         Storage.storage().reference(forURL: "gs://myapp.appspot.com").child("users").child(userId).delete() { err in
                             if let err = err {
                                 print("error: \(err)")
@@ -189,5 +190,8 @@ class AuthViewModel: ObservableObject {
     }
     
     
+    
+
+
 }
 

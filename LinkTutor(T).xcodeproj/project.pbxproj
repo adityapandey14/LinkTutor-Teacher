@@ -50,6 +50,7 @@
 		DF70D9582B9EF49800461DF0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DF70D9572B9EF49800461DF0 /* FirebaseStorage */; };
 		DF70D95A2B9EFAC200461DF0 /* ProfileInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D9592B9EFAC200461DF0 /* ProfileInputView.swift */; };
 		DF70D95C2B9EFAD900461DF0 /* newPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D95B2B9EFAD900461DF0 /* newPassword.swift */; };
+		DF860EFB2BA0515C00373BA1 /* skillType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF860EFA2BA0515C00373BA1 /* skillType.swift */; };
 		DFCC35F12B9FA01C0087BD00 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCC35F02B9FA01C0087BD00 /* AuthViewModel.swift */; };
 		DFCC35F32B9FA0E60087BD00 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFCC35F22B9FA0E60087BD00 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -110,6 +111,7 @@
 		DF70D9552B9EF46000461DF0 /* signUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = signUpView.swift; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/linkTutor/linkTutor/Screens/LoginSignUp/signUpView.swift"; sourceTree = "<group>"; };
 		DF70D9592B9EFAC200461DF0 /* ProfileInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInputView.swift; sourceTree = "<group>"; };
 		DF70D95B2B9EFAD900461DF0 /* newPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newPassword.swift; sourceTree = "<group>"; };
+		DF860EFA2BA0515C00373BA1 /* skillType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = skillType.swift; sourceTree = "<group>"; };
 		DFCC35F02B9FA01C0087BD00 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		DFCC35F22B9FA0E60087BD00 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -261,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				0F3922672B8F20270019ECA5 /* addCoursePage.swift */,
+				DF860EFA2BA0515C00373BA1 /* skillType.swift */,
 			);
 			path = courseRelated;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				0FC7383F2B8DE6D300566981 /* TeacherEnrolledClassCard.swift in Sources */,
 				0FC738112B8DE67E00566981 /* ContentView.swift in Sources */,
 				0FC7380F2B8DE67E00566981 /* LinkTutor_T_App.swift in Sources */,
+				DF860EFB2BA0515C00373BA1 /* skillType.swift in Sources */,
 				0FC738552B8DE77B00566981 /* header.swift in Sources */,
 				0FC738672B8DE88000566981 /* classMockData.swift in Sources */,
 				DF70D95A2B9EFAC200461DF0 /* ProfileInputView.swift in Sources */,
