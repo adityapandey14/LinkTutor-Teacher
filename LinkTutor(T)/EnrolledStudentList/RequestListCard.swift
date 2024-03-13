@@ -1,17 +1,21 @@
-import SwiftUI
-import Firebase
-import FirebaseAuth
-import FirebaseFirestore
+//
+//  RequestListCard.swift
+//  LinkTutor(T)
+//
+//  Created by Aditya Pandey on 13/03/24.
+//
 
-struct enrolledClassCard: View{
-    var documentId : String
+import SwiftUI
+
+struct RequestListCard: View {
+    
+    var studentName : String
+    var phoneNumber : Int
+    var id : String
     var className : String
-    var days : [String]
-    var startTime : String
-    var endTime : String
     @State var showingUpdateCourse = false
-    @EnvironmentObject var viewModel: AuthViewModel
-    @ObservedObject var skillViewModel = SkillViewModel()
+//    @EnvironmentObject var viewModel: AuthViewModel
+    @ObservedObject var viewModel = RequestListViewModel()
     
     
     var body: some View{
@@ -19,52 +23,41 @@ struct enrolledClassCard: View{
             
             HStack{
                 VStack(alignment: .leading){
-                    Text("\(className)")
+                    Text("\(studentName)")
                         .font(AppFont.mediumSemiBold)
                     
-                    Text("Days")
+                    Text("\(className)")
+                        .font(AppFont.smallSemiBold)
+                    
+                    Text("\(phoneNumber)")
                         .font(AppFont.smallReg)
                         .foregroundColor(.gray)
                         .padding(.top, 1)
-                    HStack {
-                        ForEach(days, id: \.self) { data in
-                            Text("\(data)")
-                                .font(AppFont.smallReg)
-                        }
-                    }
+                   
                     
-                    Text("Timing")
-                        .font(AppFont.smallReg)
-                        .foregroundColor(.gray)
-                        .padding(.top, 1)
-                    HStack{
-                        Text("\(startTime)")
-                            .font(AppFont.smallReg)
-                        Text("\(endTime)")
-                            .font(AppFont.smallReg)
-                    }
+                   
                     
                     HStack {
-                        NavigationLink(destination: updateCourse(documentId: documentId), isActive: $showingUpdateCourse) {
+                        
                             
                             
                             Button(action: {
                                 // Update button action
                                 
-                                showingUpdateCourse = true
+                                viewModel.updateEnrolled(requestAccepted: 1, requestDeleted: 0, id: id)
                             }) {
-                                Text("Update")
+                                Text("Accept")
                                     .frame(minWidth: 90, minHeight: 30)
                                     .background(Color.green)
                                     .foregroundColor(.white)
                                     .cornerRadius(8.0)
                             }
-                        }
+                        
                         
                         NavigationLink(destination : TeacherHomePage()){
                             Button(action: {
                                 // Delete button action
-                                skillViewModel.deleteOwnerDetails(documentId: documentId)
+                                viewModel.deleteEnrolled(id: id)
                                 
                             }) {
                                 Text("Delete")
@@ -78,7 +71,7 @@ struct enrolledClassCard: View{
                 }
                 Spacer()
             }
-            .frame(width: min(180,180), height: 160)
+            .frame(width: min(300,200), height: 110)
             .fixedSize()
             .padding()
             .background(Color.accent)
@@ -86,15 +79,9 @@ struct enrolledClassCard: View{
         }
     }
 }
-
-
-
+    
+    
+    
 #Preview {
-    enrolledClassCard(documentId: "", className: "Guitar", days: ["Mon", "Tue"], startTime: "4:00" , endTime: "5:00")
+    RequestListCard(studentName: "studentName" , phoneNumber: 123456789, id: "1", className : "className")
 }
-
-
-
-
-
-

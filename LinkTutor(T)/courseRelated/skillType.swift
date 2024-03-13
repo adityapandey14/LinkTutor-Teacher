@@ -268,6 +268,7 @@ struct skillTypeView: View {
     
     var body: some View {
         ScrollView {
+            
             ForEach(viewModel.skillTypes) { skillType in
                 VStack(alignment: .leading) {
                     Text("Skill Type: \(skillType.id)")
