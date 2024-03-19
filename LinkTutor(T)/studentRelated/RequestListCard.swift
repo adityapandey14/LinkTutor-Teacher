@@ -39,10 +39,12 @@ struct RequestListCard: View {
                     HStack {
                         Button(action: {
                             // Delete button action
-                            viewModel.updateEnrolled(requestAccepted: 1, requestSent: 0, id: id)
+                            Task {
+                                await viewModel.updateEnrolled(requestAccepted: 1, requestSent: 0, id: id)
+                            }
                             
                         }) {
-                            Text("Update")
+                            Text("Accept")
                                 .frame(minWidth: 90, minHeight: 30)
                                 .background(Color.green)
                                 .foregroundColor(.white)
@@ -53,7 +55,9 @@ struct RequestListCard: View {
                       
                             Button(action: {
                                 // Delete button action
-                                viewModel.deleteEnrolled(id: id)
+                                Task {
+                                    await viewModel.deleteEnrolled(id: id)
+                                }
                                 
                             }) {
                                 Text("Delete")

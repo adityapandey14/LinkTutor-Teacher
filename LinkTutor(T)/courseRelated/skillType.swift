@@ -123,7 +123,7 @@ class SkillViewModel: ObservableObject {
     
    
     
-    func deleteOwnerDetails() {
+    func deleteOwnerDetails() async {
         let db = Firestore.firestore()
         
         Task{
@@ -191,7 +191,7 @@ class SkillViewModel: ObservableObject {
 //end of the funtion
     
     
-    func deleteOwnerDetails(documentId: String) {
+    func deleteOwnerDetails(documentId: String) async {
         let db = Firestore.firestore()
         
         Task {

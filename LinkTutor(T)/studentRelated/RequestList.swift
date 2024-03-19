@@ -15,13 +15,19 @@ struct RequestList: View {
     
     var body: some View {
         VStack {
-            Text("Enrolled Students")
+            Text("Request List")
                 .font(.title)
                 .padding()
             let userId = Auth.auth().currentUser?.uid
+            
             VStack {
-                ForEach(viewModel.enrolledStudents.filter { $0.requestAccepted == 0 && $0.id == userId}, id: \.id) { student in
+                ForEach(viewModel.enrolledStudents.filter { $0.teacherUid == userId  && $0.requestSent == 1 }, id: \.id) { student in
                     RequestListCard(studentName: student.studentName, phoneNumber: student.studentNumber , id: student.id, className: student.className)
+                }
+                .onAppear(){
+                    Task {
+                        await AuthViewModel().fetchUser()
+                    }
                 }
             }
             .onAppear {
@@ -42,10 +48,16 @@ struct EnrolledStudent: Identifiable {
     let requestSent : Int
     let className : String
     let teacherNumber : Int
+    let teacherUid : String
+    let skillUid : String
+    let startTime : Timestamp
+    let week : [String]
+    let enrolledDate : Timestamp
 }
 
 class RequestListViewModel: ObservableObject {
     @Published var enrolledStudents: [EnrolledStudent] = []
+    static let shared = RequestListViewModel()
     
     func fetchEnrolledStudents() {
         let db = Firestore.firestore()
@@ -58,7 +70,7 @@ class RequestListViewModel: ObservableObject {
                 for document in querySnapshot!.documents {
                     let studentData = document.data()
                     if let teacherName = studentData["teacherName"] as? String,
-                       let id = studentData["id"] as? String,
+                       let id = document.documentID as? String,
                        let skillOwnerDetailsUid = studentData["skillOwnerDetailsUid"] as? String,
                        let studentName = studentData["studentName"] as? String,
                        let studentUid = studentData["studentUid"] as? String,
@@ -66,7 +78,17 @@ class RequestListViewModel: ObservableObject {
                        let requestAccepted = studentData["RequestAccepted"] as? Int ,
                        let requestSent = studentData["RequestSent"] as? Int ,
                         let className = studentData["className"] as? String ,
-                    let teacherNumber = studentData["teacherNumber"] as? Int {
+                    let teacherNumber = studentData["teacherNumber"] as? Int ,
+                        let teacherUid = studentData["teacherUid"] as? String ,
+                       
+                       let skillUid = studentData["skillUid"] as? String ,
+                       var startTime = studentData["startTime"] as? Timestamp  ,
+                       
+                       let  week = studentData["week"] as? [String],
+                       var enrolledDate = studentData["enrolledDate"] as? Timestamp
+                        
+                    
+                    {
                         let enrolledStudent = EnrolledStudent(id: id,
                                                               teacherName: teacherName,
                                                               skillOwnerDetailsUid: skillOwnerDetailsUid,
@@ -76,7 +98,12 @@ class RequestListViewModel: ObservableObject {
                                                               requestAccepted: requestAccepted,
                                                               requestSent: requestSent ,
                                                                  className:  className ,
-                                                                   teacherNumber: teacherNumber )
+                                                                   teacherNumber: teacherNumber,
+                                                              teacherUid: teacherUid,
+                                                              skillUid: skillUid,
+                                                              startTime: startTime ,
+                                                              week: week ,
+                                                              enrolledDate: enrolledDate)
                         enrolledStudentsData.append(enrolledStudent)
                     }
                 }
@@ -89,7 +116,7 @@ class RequestListViewModel: ObservableObject {
         let db = Firestore.firestore()
         
         let updatedData: [String: Any] = [
-            "ReqestSent" : requestSent ,
+            "RequestSent" : requestSent ,
             "RequestAccepted" : requestAccepted
         ]
         

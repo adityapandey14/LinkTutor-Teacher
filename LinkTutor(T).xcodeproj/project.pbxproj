@@ -45,17 +45,19 @@
 		0FC738652B8DE7F400566981 /* sectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738642B8DE7F400566981 /* sectionHeader.swift */; };
 		0FC738672B8DE88000566981 /* classMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738662B8DE88000566981 /* classMockData.swift */; };
 		0FE4B9372B9052A6008CB61A /* classLocationSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE4B9362B9052A6008CB61A /* classLocationSwiftUIView.swift */; };
+		DF23A2482BA2EFEE00005EDD /* homePageComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF23A2472BA2EFEE00005EDD /* homePageComplete.swift */; };
 		DF283B142BA0801A0061FF83 /* enrolledClassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF283B132BA0801A0061FF83 /* enrolledClassCard.swift */; };
 		DF283B162BA086680061FF83 /* enrolledClassCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF283B152BA086680061FF83 /* enrolledClassCardList.swift */; };
 		DF283B182BA097700061FF83 /* updateCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF283B172BA0976F0061FF83 /* updateCourse.swift */; };
+		DF300C032BA8CC3200871681 /* TeacherDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF300C022BA8CC3200871681 /* TeacherDetailsView.swift */; };
 		DF578C7D2BA23E3E005D0CA1 /* RequestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF578C7C2BA23E3E005D0CA1 /* RequestList.swift */; };
 		DF578C7F2BA23E59005D0CA1 /* RequestListCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF578C7E2BA23E59005D0CA1 /* RequestListCard.swift */; };
-		DF70D9542B9EF37F00461DF0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D9532B9EF37F00461DF0 /* User.swift */; };
-		DF70D9562B9EF46000461DF0 /* signUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D9552B9EF46000461DF0 /* signUpView.swift */; };
 		DF70D9582B9EF49800461DF0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DF70D9572B9EF49800461DF0 /* FirebaseStorage */; };
 		DF70D95A2B9EFAC200461DF0 /* ProfileInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D9592B9EFAC200461DF0 /* ProfileInputView.swift */; };
 		DF70D95C2B9EFAD900461DF0 /* newPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70D95B2B9EFAD900461DF0 /* newPassword.swift */; };
 		DF860EFB2BA0515C00373BA1 /* skillType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF860EFA2BA0515C00373BA1 /* skillType.swift */; };
+		DFAB0B8F2BA2586B00C012ED /* signUpView().swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAB0B8E2BA2586B00C012ED /* signUpView().swift */; };
+		DFAB0B912BA258A400C012ED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAB0B902BA258A400C012ED /* User.swift */; };
 		DFCC35F12B9FA01C0087BD00 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCC35F02B9FA01C0087BD00 /* AuthViewModel.swift */; };
 		DFCC35F32B9FA0E60087BD00 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFCC35F22B9FA0E60087BD00 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -112,16 +114,18 @@
 		0FC738642B8DE7F400566981 /* sectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sectionHeader.swift; sourceTree = "<group>"; };
 		0FC738662B8DE88000566981 /* classMockData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classMockData.swift; sourceTree = "<group>"; };
 		0FE4B9362B9052A6008CB61A /* classLocationSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classLocationSwiftUIView.swift; sourceTree = "<group>"; };
+		DF23A2472BA2EFEE00005EDD /* homePageComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homePageComplete.swift; sourceTree = "<group>"; };
 		DF283B132BA0801A0061FF83 /* enrolledClassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enrolledClassCard.swift; sourceTree = "<group>"; };
 		DF283B152BA086680061FF83 /* enrolledClassCardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enrolledClassCardList.swift; sourceTree = "<group>"; };
 		DF283B172BA0976F0061FF83 /* updateCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updateCourse.swift; sourceTree = "<group>"; };
+		DF300C022BA8CC3200871681 /* TeacherDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherDetailsView.swift; sourceTree = "<group>"; };
 		DF578C7C2BA23E3E005D0CA1 /* RequestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestList.swift; sourceTree = "<group>"; };
 		DF578C7E2BA23E59005D0CA1 /* RequestListCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListCard.swift; sourceTree = "<group>"; };
-		DF70D9532B9EF37F00461DF0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/linkTutor/linkTutor/Screens/LoginSignUp/DataModel/User.swift"; sourceTree = "<group>"; };
-		DF70D9552B9EF46000461DF0 /* signUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = signUpView.swift; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/linkTutor/linkTutor/Screens/LoginSignUp/signUpView.swift"; sourceTree = "<group>"; };
 		DF70D9592B9EFAC200461DF0 /* ProfileInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInputView.swift; sourceTree = "<group>"; };
 		DF70D95B2B9EFAD900461DF0 /* newPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newPassword.swift; sourceTree = "<group>"; };
 		DF860EFA2BA0515C00373BA1 /* skillType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = skillType.swift; sourceTree = "<group>"; };
+		DFAB0B8E2BA2586B00C012ED /* signUpView().swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "signUpView().swift"; sourceTree = "<group>"; };
+		DFAB0B902BA258A400C012ED /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DFCC35F02B9FA01C0087BD00 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		DFCC35F22B9FA0E60087BD00 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,6 +198,7 @@
 				0FC738102B8DE67E00566981 /* ContentView.swift */,
 				0FC7380E2B8DE67E00566981 /* LinkTutor_T_App.swift */,
 				0FC7383A2B8DE6B800566981 /* TeacherHomePage.swift */,
+				DF23A2472BA2EFEE00005EDD /* homePageComplete.swift */,
 				DFCC35F22B9FA0E60087BD00 /* GoogleService-Info.plist */,
 				DF77D2DB2BA0233D000F92D5 /* courseRelated */,
 				0F2EF9912B90845600CFE747 /* teachersTimetableSwiftUIView.swift */,
@@ -204,6 +209,7 @@
 				0FC738582B8DE7C400566981 /* Notifications.swift */,
 				0FE4B9322B903754008CB61A /* login */,
 				0FC738542B8DE77B00566981 /* header.swift */,
+				DF300C022BA8CC3200871681 /* TeacherDetailsView.swift */,
 				0FC738502B8DE73A00566981 /* enrolledClassDataM.swift */,
 				0FC738562B8DE78500566981 /* navBar.swift */,
 				0FC7385C2B8DE7D400566981 /* accentClassViewHeader.swift */,
@@ -248,12 +254,12 @@
 			isa = PBXGroup;
 			children = (
 				DF77D2DC2BA02365000F92D5 /* firebase */,
-				DF70D9532B9EF37F00461DF0 /* User.swift */,
 				DF70D95B2B9EFAD900461DF0 /* newPassword.swift */,
 				0FC738422B8DE6E800566981 /* myProfileView.swift */,
+				DFAB0B902BA258A400C012ED /* User.swift */,
 				DF70D9592B9EFAC200461DF0 /* ProfileInputView.swift */,
-				DF70D9552B9EF46000461DF0 /* signUpView.swift */,
 				0FC738462B8DE6F800566981 /* loginPageSwiftUIView.swift */,
+				DFAB0B8E2BA2586B00C012ED /* signUpView().swift */,
 				0FC7384E2B8DE71200566981 /* profileCard.swift */,
 			);
 			path = login;
@@ -448,7 +454,6 @@
 				0FC738432B8DE6E800566981 /* myProfileView.swift in Sources */,
 				0F3922682B8F20270019ECA5 /* addCoursePage.swift in Sources */,
 				0FC738592B8DE7C400566981 /* Notifications.swift in Sources */,
-				DF70D9542B9EF37F00461DF0 /* User.swift in Sources */,
 				0FC7384B2B8DE6F800566981 /* loginPageSwiftUIView.swift in Sources */,
 				0FC7385F2B8DE7D500566981 /* gradient header.swift in Sources */,
 				0FE4B9372B9052A6008CB61A /* classLocationSwiftUIView.swift in Sources */,
@@ -460,6 +465,7 @@
 				0FC738672B8DE88000566981 /* classMockData.swift in Sources */,
 				DF70D95A2B9EFAC200461DF0 /* ProfileInputView.swift in Sources */,
 				0FC738632B8DE7D500566981 /* accentHeader.swift in Sources */,
+				DF300C032BA8CC3200871681 /* TeacherDetailsView.swift in Sources */,
 				0FC738652B8DE7F400566981 /* sectionHeader.swift in Sources */,
 				0FC7384F2B8DE71200566981 /* profileCard.swift in Sources */,
 				DF283B182BA097700061FF83 /* updateCourse.swift in Sources */,
@@ -467,16 +473,18 @@
 				0FC738532B8DE74D00566981 /* listClassesScreeenModel().swift in Sources */,
 				DF70D95C2B9EFAD900461DF0 /* newPassword.swift in Sources */,
 				0FC738412B8DE6DC00566981 /* TeacherEnrolledClassList.swift in Sources */,
+				DFAB0B912BA258A400C012ED /* User.swift in Sources */,
 				0FC738612B8DE7D500566981 /* accentClassViewHeader.swift in Sources */,
 				0FC738392B8DE6A400566981 /* appFonts.swift in Sources */,
 				DF578C7F2BA23E59005D0CA1 /* RequestListCard.swift in Sources */,
 				0FC738572B8DE78500566981 /* navBar.swift in Sources */,
 				DF578C7D2BA23E3E005D0CA1 /* RequestList.swift in Sources */,
+				DFAB0B8F2BA2586B00C012ED /* signUpView().swift in Sources */,
 				0FC738602B8DE7D500566981 /* accentLongHeader.swift in Sources */,
 				0FC738622B8DE7D500566981 /* popularClassCard.swift in Sources */,
 				DFCC35F12B9FA01C0087BD00 /* AuthViewModel.swift in Sources */,
-				DF70D9562B9EF46000461DF0 /* signUpView.swift in Sources */,
 				0F2EF9922B90845600CFE747 /* teachersTimetableSwiftUIView.swift in Sources */,
+				DF23A2482BA2EFEE00005EDD /* homePageComplete.swift in Sources */,
 				0FC7383D2B8DE6C500566981 /* TeacherEnrolledClasses.swift in Sources */,
 				DF283B142BA0801A0061FF83 /* enrolledClassCard.swift in Sources */,
 				0FC738512B8DE73A00566981 /* enrolledClassDataM.swift in Sources */,

@@ -1,9 +1,13 @@
 import SwiftUI
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseFirestore
 
 struct myProfileView: View {
     @EnvironmentObject var viewModel : AuthViewModel
     @State var showEditView = false
-
+    @ObservedObject var teacherViewModel = TeacherViewModel.shared
+    @State var isClicked : Bool = false
     
     
     var body: some View {
@@ -18,11 +22,31 @@ struct myProfileView: View {
                 
                 
                 HStack{
-                    Image("dummyProfilePic")
-                        .resizable()
+                    if let imageUrl = teacherViewModel.teacherDetails.first?.imageUrl {
+                        AsyncImage(url: URL(string: imageUrl)) { image in
+                            image
+                                .resizable()
+                                .clipped()
+                                .frame(width: 85, height: 85)
+                                .cornerRadius(50)
+                                .padding(.trailing, 5)
+                        } placeholder: {
+                            Image(systemName: "person.crop.square")
+                                .resizable()
+                                .clipped()
+                                .frame(width: 85, height: 85)
+                                .cornerRadius(50)
+                                .padding(.trailing, 5)
+                        }
                         .frame(width: 90, height: 90)
-                        .cornerRadius(50)
-                    Spacer()
+                    } else {
+                        Image(systemName: "person.crop.square")
+                            .resizable()
+                            .clipped()
+                            .frame(width: 85, height: 85)
+                            .cornerRadius(50)
+                            .padding(.trailing, 5)
+                    }
                     
                     if let user = viewModel.currentUser {
                         VStack(alignment: .leading){
@@ -37,19 +61,17 @@ struct myProfileView: View {
                     }
                     Spacer()
                     VStack{
-                        Button(action: {
-                            showEditView.toggle()
-                        }) {
-                            Image(systemName: "pencil")
-                                .foregroundColor(.black)
+                        NavigationLink(destination: ProfileInputView() , isActive: $isClicked){
+                            Button(action: {
+                                showEditView.toggle()
+                                isClicked = true
+                            }) {
+                                Image(systemName: "pencil")
+                                    .foregroundColor(.black)
+                            }
                         }
-                        .sheet(isPresented: $showEditView) {
-                            ProfileInputView()
-                        }
-//                        NavigationLink(destination: ProfileInputView()){
-//                            Image(systemName: "pencil")
-//                                .foregroundColor(.black)
-//                        }
+                      
+
                         Spacer()
                     }
                 }
@@ -96,7 +118,7 @@ struct myProfileView: View {
                     } label: {
                         Text("Logout")
                             .font(AppFont.mediumSemiBold)
-                            .foregroundStyle(Color.black)
+                            .foregroundStyle(Color.white)
                             .frame(width: 200, height: 35)
                             .padding()
                             .background(Color.elavated)
@@ -110,7 +132,14 @@ struct myProfileView: View {
                 Spacer()
             }
             .padding()
-           
+            .background(Color.background)
+        }
+        .onAppear {
+          
+            Task {
+                let userId = Auth.auth().currentUser?.uid
+                await teacherViewModel.fetchTeacherDetailsByID(teacherID: userId!)
+            }
         }
     }
 }
@@ -122,4 +151,3 @@ struct myProfileView: View {
           return myProfileView()
               .environmentObject(viewModel)
 }
-

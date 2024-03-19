@@ -209,7 +209,8 @@ struct addCoursePage: View {
     @State private var className = ""
     @State private var startTime = Date()
     @State private var endTime = Date()
-    @State private var classFee : Int = 0
+    @State private var classFeeString: String = ""
+       @State private var classFee: Double = 0.0
     @State private var selectedMode: ClassMode = .online
     @State private var selectedDays: [Day] = []
     @State private var isTeacherHomePageActive = false
@@ -238,6 +239,7 @@ struct addCoursePage: View {
                 VStack {
                     Section(header: CustomSectionHeader(title: "Class Details")) {
                         TextField("Skill Type", text: $skillType)
+                            .autocapitalization(.none)
                         TextField("Academy Name", text: $academyName)
                         TextField("Class Name", text: $className)
                         
@@ -296,8 +298,16 @@ struct addCoursePage: View {
                         .fontWeight(.bold)
                         .font(.system(size: 20).weight(.bold))
                         .fontDesign(.rounded)
-                    TextField("Class Fee", value: $classFee, formatter: NumberFormatter())
-                        .keyboardType(.numberPad)
+                    
+                    
+                    TextField("Class Fee", text: $classFeeString)
+                               .keyboardType(.numberPad)
+                               .onChange(of: classFeeString) { newValue in
+                                   if let fee = Double(newValue) {
+                                       classFee = fee
+                                   }
+                               }
+                                
                 }
                 
                 Spacer()
@@ -308,7 +318,7 @@ struct addCoursePage: View {
                            academyName: academyName,
                            className: className,
                            mode: selectedMode.rawValue,
-                           fees: classFee,
+                           fees: Int(classFee),
                            week: selectedDays.map { $0.rawValue },
                            startTime: startTime.description,
                            endTime: endTime.description

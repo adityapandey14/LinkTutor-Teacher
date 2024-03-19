@@ -1,11 +1,12 @@
 import SwiftUI
 import Firebase
+import FirebaseAuth
+import FirebaseStorage
 
 struct ProfileInputView: View {
     
     @EnvironmentObject var viewModel: AuthViewModel
-    
-    @State private var image: Image?
+  
     @State private var fullName: String = ""
     @State private var email: String = ""
     @State private var city: String = ""
@@ -13,10 +14,13 @@ struct ProfileInputView: View {
     @State private var about: String = ""
     @State private var occupation : String = ""
     @State private var age : String = ""
-    @State private var imageUrl : String = "teacherStockPhoto.jpg"
+
+  
     @State private var location: GeoPoint = GeoPoint(latitude: 12.8096, longitude: 80.8097)
     
-    @State private var showImagePicker: Bool = false
+    @State var isPickerShowing = false
+    @State var selectedImage: UIImage?
+    
     @State private var isProfileIsSubmit = false
     
     var body: some View {
@@ -33,12 +37,11 @@ struct ProfileInputView: View {
                     
                     
                     Button(action: {
-                        showImagePicker = true
+                        isPickerShowing = true
                     }) {
-                        if let image = image {
-                            image
-                                .resizable()
-                            
+                        if let image = selectedImage {
+                            Image(uiImage: image)
+                                .resizable() // Call resizable on Image, not UIImage
                                 .frame(width: 100, height: 100)
                                 .cornerRadius(50.0)
                         } else {
@@ -47,12 +50,10 @@ struct ProfileInputView: View {
                                 .foregroundColor(.gray)
                                 .frame(width: 90, height: 90)
                                 .cornerRadius(50.0)
-                            
                         }
-                        //Text("Change profile photo").foregroundColor(.blue)
                     }
-                    .sheet(isPresented: $showImagePicker) {
-                        ImagePicker(image: $image)
+                    .sheet(isPresented: $isPickerShowing , onDismiss: nil) {
+                        ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
                     }
                 }
                 .padding()
@@ -94,7 +95,7 @@ struct ProfileInputView: View {
                 }
                 .listStyle(.plain)
                 .background(.clear)
-                NavigationLink(destination: TeacherHomePage(), isActive: $isProfileIsSubmit) {
+                NavigationLink(destination: homePageComplete(), isActive: $isProfileIsSubmit) {
                     Button(action: {
                         // Handle add class action
                         viewModel.updateTeacherProfile(fullName: fullName,
@@ -102,10 +103,10 @@ struct ProfileInputView: View {
                                                        aboutParagraph: about,
                                                        age: age,
                                                        city: city,
-                                                       imageUrl: imageUrl,
                                                        location: location,
                                                        occupation: occupation,
-                                                       phoneNumber: phoneNumber)
+                                                       phoneNumber: phoneNumber ,
+                                                       selectedImage: selectedImage)
                         // Activate the navigation to TeacherHomePage
                         
                         
@@ -129,65 +130,58 @@ struct ProfileInputView: View {
         }
     }
         
-        func submitProfileData() {
-            // Handle submission logic here
-            print("Name: \(fullName)")
-            print("Email: \(email)")
-            print("City: \(city)")
-            print("Phone Number: \(phoneNumber)")
-            print("About: \(about)")
-            // You can perform additional actions here, such as validation or sending data to a server.
-        }
     }
 
-
-
-#Preview {
-    ProfileInputView()
-    }
-//struct ProfileInputView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfileInputView()
-//    }
-//}
 
 
 
 
 struct ImagePicker: UIViewControllerRepresentable {
-    @Binding var image: Image?
-    @Environment(\.presentationMode) var presentationMode
-
-    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-        let parent: ImagePicker
-
-        init(parent: ImagePicker) {
-            self.parent = parent
-        }
-
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let uiImage = info[.originalImage] as? UIImage {
-                parent.image = Image(uiImage: uiImage)
-            }
-
-            parent.presentationMode.wrappedValue.dismiss()
-        }
-
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            parent.presentationMode.wrappedValue.dismiss()
-        }
+    
+    @Binding var selectedImage: UIImage?
+    @Binding var isPickerShowing: Bool
+    
+    func makeUIViewController(context: Context) -> some UIViewController {
+        let imagePicker1 = UIImagePickerController()
+        imagePicker1.sourceType = .photoLibrary
+        imagePicker1.delegate = context.coordinator
+        
+        return imagePicker1
     }
-
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+    }
+    
     func makeCoordinator() -> Coordinator {
-        Coordinator(parent: self)
+        return Coordinator(self)
     }
-
-    func makeUIViewController(context: Context) -> UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.delegate = context.coordinator
-        picker.sourceType = .photoLibrary
-        return picker
-    }
-
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+    
 }
+
+class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    var parent: ImagePicker
+    init(_ picker: ImagePicker){
+        self.parent = picker
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("Image selected")
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as?
+            UIImage{
+            DispatchQueue.main.async {
+                self.parent.selectedImage = image
+            }
+        }
+        parent.isPickerShowing = false
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print("Cancelled")
+        parent.isPickerShowing = false
+    }
+}
+
+
+#Preview {
+    ProfileInputView()
+    }

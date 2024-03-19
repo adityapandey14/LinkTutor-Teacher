@@ -90,7 +90,9 @@ class AuthViewModel: ObservableObject {
                         print("error: \(err)")
                     } else {
                         print("Deleted user in db users")
-                        SkillViewModel().deleteOwnerDetails()
+                        Task {
+                            await SkillViewModel().deleteOwnerDetails()
+                        }
                         Storage.storage().reference(forURL: "gs://myapp.appspot.com").child("Teachers").child(userId).delete() { err in
                             if let err = err {
                                 print("error: \(err)")
@@ -139,7 +141,7 @@ class AuthViewModel: ObservableObject {
     //To add Course Data
      func addCourseData(skillType: String, academyName: String, className: String, mode: String, fees: Int, week: [String], startTime: String, endTime: String) {
         
-         let skill = skillType.lowercased()
+         let skill = skillType
          let db = Firestore.firestore()
          
          Task{
@@ -173,26 +175,59 @@ class AuthViewModel: ObservableObject {
  
     
     
-    func updateTeacherProfile(fullName : String , email : String , aboutParagraph : String , age : String , city : String , imageUrl : String , location: GeoPoint , occupation : String , phoneNumber : Int) {
+    func updateTeacherProfile(fullName: String, email: String, aboutParagraph: String, age: String, city: String, location: GeoPoint, occupation: String, phoneNumber: Int, selectedImage: UIImage?) {
         let db = Firestore.firestore()
-        
-        Task{
-            
-            await fetchUser()
-        }
         let userId = Auth.auth().currentUser!.uid
         
-      
-        db.collection("Teachers").document(userId).setData([ "email" : email ,
-                                                             "fullName" : fullName ,
-                                                             "aboutParagraph" : aboutParagraph ,
-                                                             "age" : age ,
-                                                             "city" : city ,
-                                                             "imageUrl" : imageUrl ,
-                                                             "location" : location ,
-                                                             "occupation" : occupation,
-                                                             "phoneNumber" : phoneNumber] , merge : true)
+        guard let imageData = selectedImage?.jpegData(compressionQuality: 0.8) else {
+            print("No image data available")
+            return
+        }
         
+        let storageRef = Storage.storage().reference()
+        let fileRef = storageRef.child("/\(userId).jpg")
+        
+        let uploadTask = fileRef.putData(imageData, metadata: nil) { metadata, error in
+            if let error = error {
+                print("Error uploading image: \(error.localizedDescription)")
+                return
+            }
+            
+            print("Image has been uploaded")
+            
+            fileRef.downloadURL { url, error in
+                if let error = error {
+                    print("Error getting download URL: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let downloadURL = url else {
+                    print("Download URL not found")
+                    return
+                }
+                
+                // Update user document with profile data and image URL
+                let userData: [String: Any] = [
+                    "email": email,
+                    "fullName": fullName,
+                    "aboutParagraph": aboutParagraph,
+                    "age": age,
+                    "city": city,
+                    "location": location,
+                    "occupation": occupation,
+                    "phoneNumber": phoneNumber,
+                    "imageUrl": downloadURL.absoluteString
+                ]
+                
+                db.collection("Teachers").document(userId).setData(userData, merge: true) { error in
+                    if let error = error {
+                        print("Error updating user document: \(error.localizedDescription)")
+                    } else {
+                        print("User document updated successfully")
+                    }
+                }
+            }
+        }
     }
     
     
@@ -229,9 +264,6 @@ class AuthViewModel: ObservableObject {
     }
     
     
-
-
- 
 
 }
 

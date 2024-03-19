@@ -3,22 +3,21 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-struct enrolledClassCard: View{
-    var documentId : String
-    var className : String
-    var days : [String]
-    var startTime : String
-    var endTime : String
+struct enrolledClassCard: View {
+    var documentId: String
+    var className: String
+    var days: [String]
+    var startTime: String
+    var endTime: String
     @State var showingUpdateCourse = false
     @EnvironmentObject var viewModel: AuthViewModel
     @ObservedObject var skillViewModel = SkillViewModel()
     
-    
-    var body: some View{
-        NavigationStack{
-            
-            HStack{
-                VStack(alignment: .leading){
+
+    var body: some View {
+        NavigationStack {
+            HStack {
+                VStack(alignment: .leading) {
                     Text("\(className)")
                         .font(AppFont.mediumSemiBold)
                     
@@ -37,7 +36,7 @@ struct enrolledClassCard: View{
                         .font(AppFont.smallReg)
                         .foregroundColor(.gray)
                         .padding(.top, 1)
-                    HStack{
+                    HStack {
                         Text("\(startTime)")
                             .font(AppFont.smallReg)
                         Text("\(endTime)")
@@ -46,11 +45,8 @@ struct enrolledClassCard: View{
                     
                     HStack {
                         NavigationLink(destination: updateCourse(documentId: documentId), isActive: $showingUpdateCourse) {
-                            
-                            
                             Button(action: {
                                 // Update button action
-                                
                                 showingUpdateCourse = true
                             }) {
                                 Text("Update")
@@ -61,18 +57,17 @@ struct enrolledClassCard: View{
                             }
                         }
                         
-                        NavigationLink(destination : TeacherHomePage()){
-                            Button(action: {
-                                // Delete button action
-                                skillViewModel.deleteOwnerDetails(documentId: documentId)
-                                
-                            }) {
-                                Text("Delete")
-                                    .frame(minWidth: 90, minHeight: 30)
-                                    .background(Color.red)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(8.0)
+                        Button(action: {
+                            // Delete button action
+                            Task {
+                                await skillViewModel.deleteOwnerDetails(documentId: documentId)
                             }
+                        }) {
+                            Text("Delete")
+                                .frame(minWidth: 90, minHeight: 30)
+                                .background(Color.red)
+                                .foregroundColor(.white)
+                                .cornerRadius(8.0)
                         }
                     }
                 }
@@ -86,8 +81,6 @@ struct enrolledClassCard: View{
         }
     }
 }
-
-
 
 #Preview {
     enrolledClassCard(documentId: "", className: "Guitar", days: ["Mon", "Tue"], startTime: "4:00" , endTime: "5:00")
