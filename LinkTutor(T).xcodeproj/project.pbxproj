@@ -45,6 +45,8 @@
 		0FC738652B8DE7F400566981 /* sectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738642B8DE7F400566981 /* sectionHeader.swift */; };
 		0FC738672B8DE88000566981 /* classMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738662B8DE88000566981 /* classMockData.swift */; };
 		0FE4B9372B9052A6008CB61A /* classLocationSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE4B9362B9052A6008CB61A /* classLocationSwiftUIView.swift */; };
+		8449F3912BAD2CFD00135963 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449F3902BAD2CFD00135963 /* CalenderView.swift */; };
+		8449F3932BAD2E7D00135963 /* calenderPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449F3922BAD2E7D00135963 /* calenderPage.swift */; };
 		DF23A2482BA2EFEE00005EDD /* homePageComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF23A2472BA2EFEE00005EDD /* homePageComplete.swift */; };
 		DF283B142BA0801A0061FF83 /* enrolledClassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF283B132BA0801A0061FF83 /* enrolledClassCard.swift */; };
 		DF283B162BA086680061FF83 /* enrolledClassCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF283B152BA086680061FF83 /* enrolledClassCardList.swift */; };
@@ -114,6 +116,8 @@
 		0FC738642B8DE7F400566981 /* sectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sectionHeader.swift; sourceTree = "<group>"; };
 		0FC738662B8DE88000566981 /* classMockData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classMockData.swift; sourceTree = "<group>"; };
 		0FE4B9362B9052A6008CB61A /* classLocationSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classLocationSwiftUIView.swift; sourceTree = "<group>"; };
+		8449F3902BAD2CFD00135963 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
+		8449F3922BAD2E7D00135963 /* calenderPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calenderPage.swift; sourceTree = "<group>"; };
 		DF23A2472BA2EFEE00005EDD /* homePageComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homePageComplete.swift; sourceTree = "<group>"; };
 		DF283B132BA0801A0061FF83 /* enrolledClassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enrolledClassCard.swift; sourceTree = "<group>"; };
 		DF283B152BA086680061FF83 /* enrolledClassCardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enrolledClassCardList.swift; sourceTree = "<group>"; };
@@ -196,7 +200,9 @@
 			children = (
 				0FC738382B8DE6A400566981 /* appFonts.swift */,
 				0FC738102B8DE67E00566981 /* ContentView.swift */,
+				8449F3902BAD2CFD00135963 /* CalenderView.swift */,
 				0FC7380E2B8DE67E00566981 /* LinkTutor_T_App.swift */,
+				8449F3922BAD2E7D00135963 /* calenderPage.swift */,
 				0FC7383A2B8DE6B800566981 /* TeacherHomePage.swift */,
 				DF23A2472BA2EFEE00005EDD /* homePageComplete.swift */,
 				DFCC35F22B9FA0E60087BD00 /* GoogleService-Info.plist */,
@@ -482,11 +488,13 @@
 				DFAB0B8F2BA2586B00C012ED /* signUpView().swift in Sources */,
 				0FC738602B8DE7D500566981 /* accentLongHeader.swift in Sources */,
 				0FC738622B8DE7D500566981 /* popularClassCard.swift in Sources */,
+				8449F3932BAD2E7D00135963 /* calenderPage.swift in Sources */,
 				DFCC35F12B9FA01C0087BD00 /* AuthViewModel.swift in Sources */,
 				0F2EF9922B90845600CFE747 /* teachersTimetableSwiftUIView.swift in Sources */,
 				DF23A2482BA2EFEE00005EDD /* homePageComplete.swift in Sources */,
 				0FC7383D2B8DE6C500566981 /* TeacherEnrolledClasses.swift in Sources */,
 				DF283B142BA0801A0061FF83 /* enrolledClassCard.swift in Sources */,
+				8449F3912BAD2CFD00135963 /* CalenderView.swift in Sources */,
 				0FC738512B8DE73A00566981 /* enrolledClassDataM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -658,6 +666,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -686,6 +695,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

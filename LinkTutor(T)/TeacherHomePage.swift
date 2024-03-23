@@ -6,7 +6,7 @@ struct TeacherHomePage: View{
     @StateObject var viewModel = listClassesScreenModel()
     @State var isShowingFilterViewPopup = false
     @ObservedObject var teacherViewModel = TeacherViewModel.shared
-   
+    @State private var isPresentingAddCourseSheet = false
     
     var body: some View{
         NavigationView {
@@ -17,44 +17,41 @@ struct TeacherHomePage: View{
                         let nameComponents = fullName.components(separatedBy: " ")
                         let firstName = nameComponents.first ?? ""
                         header(yourName: firstName)
-                            .padding(.bottom)
-                            .padding(.top)
                     }
-                    HStack{
-                        Image(systemName: "magnifyingglass")
-                            .foregroundStyle(Color.myGray)
-                        Text("Skills, tutors, centers...")
-                        Spacer()
-                    }
-                    .foregroundStyle(Color.myGray).opacity(0.6)
-                    .padding(3)
-                    .padding(.leading, 10)
-                    .frame(width: 370, height: 35)
-                    .background(.ultraThinMaterial)
-                    .cornerRadius(8)
                     
-
-                    
-                
-                
-                NavigationLink(destination : addCoursePage()){
-                    HStack{
-                        Image(systemName: "plus")
-                        Text(" Add Class !")
-                        Spacer()
-                    }
-                    .font(AppFont.mediumSemiBold)
-                    // .frame(width: .infinity, height: 35)
-                    .padding()
-                    .background(Color.accent)
-                    .foregroundStyle(Color.black)
-                    .cornerRadius(20)
+//                    NavigationLink(destination : addCoursePage()){
+//                        HStack{
+//                            Image(systemName: "plus")
+//                            Text(" Add Class !")
+//                            Spacer()
+//                        }
+//                        .font(AppFont.mediumSemiBold)
+//                        .padding()
+//                        .background(Color.accent)
+//                        .foregroundStyle(Color.black)
+//                        .cornerRadius(20)
+//                    }
+                    Button(action: {
+                                isPresentingAddCourseSheet.toggle()
+                            }) {
+                                HStack {
+                                    Image(systemName: "plus")
+                                    Text(" Add Class !")
+                                    Spacer()
+                                }
+                                .font(AppFont.mediumSemiBold)
+                                .padding()
+                                .background(Color.accent)
+                                .foregroundColor(Color.black) // Use foregroundColor instead of foregroundStyle
+                                .cornerRadius(20)
+                            }
+                            .sheet(isPresented: $isPresentingAddCourseSheet) {
+                                addCoursePage()
+                            }
+                    .padding(.top)
                 }
-                }
-                .padding(.horizontal)
-                .padding(.bottom, 20)
+                .padding(.bottom, 10)
                 .onAppear {
-                    
                     Task {
                         let userId = Auth.auth().currentUser?.uid
                         await teacherViewModel.fetchTeacherDetailsByID(teacherID: userId!)

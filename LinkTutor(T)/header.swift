@@ -7,10 +7,13 @@ struct header: View{
             HStack{
                 VStack(alignment: .leading){
                     HStack{
-                        Text(yourName)
+                        HStack{
+                            Text("Hi")
+                            Text(yourName)
+                        }
                             .foregroundStyle(Color.white)
                             .font(AppFont.largeBold)
-                            .padding(.bottom, 1)
+//                            .padding(.bottom, 1)
                         Spacer()
                         //myProfileView
                         NavigationLink(destination: myProfileView()){
@@ -21,7 +24,7 @@ struct header: View{
                                 .foregroundColor(.white)
                         }
                     }
-                    Text("what are you looking for today?")
+                    Text("Ready to inspire minds today?")
                         .foregroundStyle(Color.white)
                         .font(AppFont.mediumReg)
                 }

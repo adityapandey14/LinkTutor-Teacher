@@ -17,6 +17,10 @@ struct homePageComplete: View {
                         .padding(.top)
                 }
             
+            CalendarView()
+                .tabItem {
+                    Label("My Timetable" , systemImage: "calendar")
+                }
             
             RequestList()
                 .tabItem {

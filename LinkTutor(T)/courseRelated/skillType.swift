@@ -22,7 +22,7 @@ struct SkillType: Identifiable, Equatable {
     }
 }
 
-struct SkillOwnerDetail: Identifiable, Codable {
+struct SkillOwnerDetail: Identifiable, Codable , Equatable {
     var id: String
     var academy: String
     var className: String
@@ -265,6 +265,7 @@ class SkillViewModel: ObservableObject {
 struct skillTypeView: View {
     @ObservedObject var viewModel = SkillViewModel()
     @State private var selectedSkillType: SkillType?
+    let userId = Auth.auth().currentUser?.uid
     
     var body: some View {
         ScrollView {
@@ -281,7 +282,7 @@ struct skillTypeView: View {
                     
                   
                     
-                    ForEach(skillType.skillOwnerDetails.filter { $0.teacherUid == "1"  }) { detail in
+                    ForEach(skillType.skillOwnerDetails.filter { $0.teacherUid == userId  }) { detail in
                         VStack(alignment: .leading) {
                             Text("Class Name: \(detail.className)")
                                 .padding()
