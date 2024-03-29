@@ -59,7 +59,7 @@ struct myProfileView: View {
                     }
                     Spacer()
                     VStack{
-                        NavigationLink(destination: ProfileInputView() , isActive: $isClicked){
+//                        NavigationLink(destination: ProfileInputView() , isActive: $isClicked){}
                             Button(action: {
                                 showEditView.toggle()
                                 isClicked = true
@@ -68,9 +68,9 @@ struct myProfileView: View {
                                     .font(AppFont.actionButton)
                                     .foregroundStyle(Color.blue)
                             }
-                        }
-                      
-
+                            .sheet(isPresented: $showEditView) {
+                                ProfileInputView()
+                            }
                         Spacer()
                     }
                 }

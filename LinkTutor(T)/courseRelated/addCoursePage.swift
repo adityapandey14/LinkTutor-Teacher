@@ -30,8 +30,8 @@ struct addCoursePage: View {
     @State private var selectedMode: ClassMode = .online
     @State private var selectedDays: [Day] = []
     @State private var isTeacherHomePageActive = false
-    @Binding var isPresented: Bool
-    
+    @Environment(\.presentationMode) var presentationMode
+
     enum ClassMode: String, CaseIterable {
         case online = "Online"
         case offline = "Offline"
@@ -50,28 +50,30 @@ struct addCoursePage: View {
 //            .hidden()
         
         
-        NavigationView{
+        NavigationStack{
             VStack{
                 List{
                     Section(header: CustomSectionHeader(title: "Class Details").foregroundColor(.white)){
                         TextField("Skill Type", text: $skillType)
+                            .autocapitalization(.none)
                             .cornerRadius(10)
                         TextField("Academy Name", text: $academyName)
                             .cornerRadius(10)
                         TextField("Class Name", text: $className)
                             .cornerRadius(10)
                     }
+                    .listRowBackground(Color.darkbg)
                     
                     //choose timing
                     Section{
                         DatePicker("Start Time", selection: $startTime, displayedComponents: [ .hourAndMinute])
                             .datePickerStyle(.compact)
                             .font(AppFont.smallReg)
-                        
                         DatePicker("End Time", selection: $endTime, displayedComponents: [.hourAndMinute])
                             .datePickerStyle(.compact)
                             .font(AppFont.smallReg)
                     }
+                    .listRowBackground(Color.darkbg)
                     
                     //choose mode
                     Section(header: CustomSectionHeader(title: "Modes").foregroundColor(.white)) {
@@ -82,7 +84,6 @@ struct addCoursePage: View {
                         }
                         .pickerStyle(SegmentedPickerStyle())
                     }
-//                    .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
                     
                     //Choose days
@@ -107,7 +108,6 @@ struct addCoursePage: View {
                             Spacer()
                         }
                     }
-//                    .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
                     
                     //Fee
@@ -115,6 +115,7 @@ struct addCoursePage: View {
                         TextField("Class Fee", value: $classFee, formatter: NumberFormatter())
                             .keyboardType(.numberPad)
                     }
+                    .listRowBackground(Color.darkbg)
                     
                     //submit button
                     HStack{
@@ -132,6 +133,7 @@ struct addCoursePage: View {
                             )
                             // Activate the navigation to TeacherHomePage
                             isTeacherHomePageActive = true
+                            presentationMode.wrappedValue.dismiss()
                         }) {
                             Text("Add Class")
                                 .foregroundColor(.black)
@@ -151,32 +153,17 @@ struct addCoursePage: View {
                     
             } //v end
             .background(Color.background)
-            .navigationTitle("Add Class")
-                        .toolbar {
-                            ToolbarItem(placement: .cancellationAction) {
-                                Button("Cancel") {
-                                    isPresented = false
-                                }
-                            }
-
-                            ToolbarItem(placement: .confirmationAction) {
-                                Button("Save") {
-                                    // Perform save action here
-                                    isPresented = false
-                                }
-                            }
-                        }
         } //navstack end
     }
 }
 
-struct addCoursePage_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            addCoursePage()
-        }
-    }
-}
+//struct addCoursePage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView {
+//            addCoursePage()
+//        }
+//    }
+//}
 
 
 ////struct LocationPopupView: View {

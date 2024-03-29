@@ -34,6 +34,7 @@ struct ProfileInputView: View {
                             .font(AppFont.largeBold)
                         Spacer()
                     }
+                    .padding()
                     
                     
                     Button(action: {
@@ -56,45 +57,47 @@ struct ProfileInputView: View {
                         ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
                     }
                 }
-                .padding()
+                
                 
                 List{
-                    Section(header: Text("")){
+                    Section(header: CustomSectionHeader(title: "About").foregroundColor(.white)){
+                        
                         // Name TextField
                         TextField("Name", text: $fullName)
-                            .listRowBackground(Color.elavated)
-                        
+                            .listRowBackground(Color.darkbg)
                         // About TextField
-                        TextField("About", text: $about)
-                            .listRowBackground(Color.elavated)
+                        TextField("Bio", text: $about)
+                            .listRowBackground(Color.darkbg)
+                        //city
+                        TextField("City", text: $city)
+                            .listRowBackground(Color.darkbg)
+                        
+                        TextField("Occupation", text: $occupation)
+                            .listRowBackground(Color.darkbg)
+                    }
+                    
+                    Section(header: CustomSectionHeader(title: "Personal").foregroundColor(.white)){
+                        //age
+                        TextField("Age", text: $age)
+                            .listRowBackground(Color.darkbg)
                         
                         // Email TextField
                         TextField("Email Address", text: $email)
-                            .listRowBackground(Color.elavated)
+                            .listRowBackground(Color.darkbg)
                             .autocapitalization(.none)
-                        
-                        TextField("City", text: $city)
-                            .listRowBackground(Color.elavated)
-                        
-                        
-                        
-                        TextField("Age", text: $age)
-                            .listRowBackground(Color.elavated)
-                        TextField("Occupation", text: $occupation)
-                            .listRowBackground(Color.elavated)
                     }
                     
-                    Section(header: Text("Phone Number")){
+                    Section(header: CustomSectionHeader(title: "Phone Number").foregroundColor(.white)){
                         // Password SecureField
                         TextField("PhoneNumber", value: $phoneNumber, formatter: NumberFormatter())
                             .keyboardType(.numberPad)
+                            .listRowBackground(Color.darkbg)
                     }
-                    
-                    
-                    
                 }
-                .listStyle(.plain)
-                .background(.clear)
+                .listStyle(.insetGrouped)
+                .background(Color.background)
+                .scrollContentBackground(.hidden)
+                
                 NavigationLink(destination: homePageComplete(), isActive: $isProfileIsSubmit) {
                     Button(action: {
                         // Handle add class action
@@ -113,12 +116,13 @@ struct ProfileInputView: View {
                         isProfileIsSubmit = true
                     }) {
                         Text("Submit Profile")
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .font(AppFont.mediumSemiBold)
-                            .padding()
-                            .background(Color.blue)
-                            .cornerRadius(20)
                     }
+                    .frame(width:250, height: 25)
+                    .padding()
+                    .background(Color.accent)
+                    .cornerRadius(50)
                 }
                
                 // Submit Button

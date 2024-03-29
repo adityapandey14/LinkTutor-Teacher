@@ -15,64 +15,105 @@ struct RequestListCard: View {
     @State var showingUpdateCourse = false
 //    @EnvironmentObject var viewModel: AuthViewModel
     @ObservedObject var viewModel = RequestListViewModel()
-    
+    @State private var isCopied = false
+    @State private var showDeleteAlert = false
+    @State private var showAcceptAlert = false
     
     var body: some View{
         NavigationStack{
             
             HStack{
+                
+                //details
                 VStack(alignment: .leading){
                     Text("\(studentName)")
                         .font(AppFont.mediumSemiBold)
+                        .foregroundStyle(Color.black)
                     
                     Text("\(className)")
                         .font(AppFont.smallSemiBold)
-                    
-                    Text("\(phoneNumber)")
-                        .font(AppFont.smallReg)
-                        .foregroundColor(.gray)
-                        .padding(.top, 1)
-                   
-                    
-                   
+                        .foregroundStyle(Color.black)
                     
                     HStack {
-                        Button(action: {
-                            // Delete button action
-                            Task {
-                                await viewModel.updateEnrolled(requestAccepted: 1, requestSent: 0, id: id)
-                            }
-                            
-                        }) {
-                            Text("Accept")
-                                .frame(minWidth: 90, minHeight: 30)
-                                .background(Color.green)
-                                .foregroundColor(.white)
-                                .cornerRadius(8.0)
-                        }
-                    
+                        Image(systemName: "phone.fill")
+                            .font(.system(size: 17))
                         
-                      
-                            Button(action: {
-                                // Delete button action
+                        Text("\(phoneNumber)")
+                            .font(AppFont.actionButton)
+                    }
+                    .padding([.top, .bottom], 6)
+                    .padding([.leading, .trailing], 12)
+                    .background(Color.phoneAccent)
+                    .foregroundStyle(Color.black)
+                    .cornerRadius(50)
+                    .onTapGesture {
+                        let phoneNumberString = "\(phoneNumber)"
+                        UIPasteboard.general.string = phoneNumberString
+                        isCopied = true
+                    }
+                    .alert(isPresented: $isCopied) {
+                        Alert(title: Text("Copied!"), message: Text("Phone number copied to clipboard."), dismissButton: .default(Text("OK")))
+                    }
+                }
+                
+                Spacer()
+                
+                
+                //accept and del buttons
+                VStack {
+                    Button(action: {
+                        // Delete button action
+                        showAcceptAlert.toggle()
+                        Task {
+                            await viewModel.updateEnrolled(requestAccepted: 1, requestSent: 0, id: id)
+                        }
+                        
+                    }) {
+                        Text("Accept")
+                            .frame(minWidth: 90, minHeight: 30)
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(8.0)
+                    }
+                    .alert(isPresented: $showAcceptAlert) {
+                        Alert(
+                            title: Text("Accept"),
+                            message: Text("New student has been accepted"),
+                            dismissButton: .default(Text("Okay"))
+                        )
+                    }
+                    
+                    Button(action: {
+                        // Delete button action
+                        showDeleteAlert.toggle()
+//                        Task {
+//                            await viewModel.deleteEnrolled(id: id)
+//                        }
+                        
+                    }) {
+                        Text("Delete")
+                            .frame(minWidth: 90, minHeight: 30)
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(8.0)
+                    }
+                    .alert(isPresented: $showDeleteAlert) {
+                        Alert(
+                            title: Text("Delete request"),
+                            message: Text("Are you sure?"),
+                            primaryButton: .destructive(Text("Delete")) {
                                 Task {
                                     await viewModel.deleteEnrolled(id: id)
                                 }
-                                
-                            }) {
-                                Text("Delete")
-                                    .frame(minWidth: 90, minHeight: 30)
-                                    .background(Color.red)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(8.0)
-                            }
-                        
+                            },
+                            secondaryButton: .cancel()
+                        )
                     }
                 }
-                Spacer()
-            }
-            .frame(width: min(300,200), height: 110)
-            .fixedSize()
+                
+            }// hstack end
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .fixedSize(horizontal: false, vertical: true) // Allow vertical expansion only
             .padding()
             .background(Color.accentColor)
             .cornerRadius(10)

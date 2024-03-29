@@ -9,15 +9,18 @@
 //This code is working it is not showing anything because if the userId mathces then only it will show details as of now there is now details added in the database related to this id
 import SwiftUI
 import Firebase
+import FirebaseAuth
 
 struct RequestList: View {
     @StateObject var viewModel = RequestListViewModel()
     
     var body: some View {
         VStack {
-            Text("Request List")
-                .font(.title)
-                .padding()
+            HStack{
+                Text("Request List")
+                    .font(AppFont.largeBold)
+                Spacer()
+            }
             let userId = Auth.auth().currentUser?.uid
             
             VStack {
@@ -33,7 +36,10 @@ struct RequestList: View {
             .onAppear {
                 viewModel.fetchEnrolledStudents()
             }
-        }
+            Spacer()
+        }//vend
+        .padding()
+        .background(Color.background)
     }
 }
 

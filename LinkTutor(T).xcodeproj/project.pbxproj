@@ -60,6 +60,8 @@
 		DF860EFB2BA0515C00373BA1 /* skillType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF860EFA2BA0515C00373BA1 /* skillType.swift */; };
 		DFAB0B8F2BA2586B00C012ED /* signUpView().swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAB0B8E2BA2586B00C012ED /* signUpView().swift */; };
 		DFAB0B912BA258A400C012ED /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAB0B902BA258A400C012ED /* User.swift */; };
+		DFB4225B2BB275B800562BC3 /* enrolledStudentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB4225A2BB275B800562BC3 /* enrolledStudentList.swift */; };
+		DFB4225D2BB275DC00562BC3 /* enrolledStudentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB4225C2BB275DC00562BC3 /* enrolledStudentCard.swift */; };
 		DFCC35F12B9FA01C0087BD00 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCC35F02B9FA01C0087BD00 /* AuthViewModel.swift */; };
 		DFCC35F32B9FA0E60087BD00 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFCC35F22B9FA0E60087BD00 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -130,6 +132,8 @@
 		DF860EFA2BA0515C00373BA1 /* skillType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = skillType.swift; sourceTree = "<group>"; };
 		DFAB0B8E2BA2586B00C012ED /* signUpView().swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "signUpView().swift"; sourceTree = "<group>"; };
 		DFAB0B902BA258A400C012ED /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DFB4225A2BB275B800562BC3 /* enrolledStudentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enrolledStudentList.swift; sourceTree = "<group>"; };
+		DFB4225C2BB275DC00562BC3 /* enrolledStudentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enrolledStudentCard.swift; sourceTree = "<group>"; };
 		DFCC35F02B9FA01C0087BD00 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		DFCC35F22B9FA0E60087BD00 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -287,6 +291,8 @@
 			children = (
 				DF578C7C2BA23E3E005D0CA1 /* RequestList.swift */,
 				DF578C7E2BA23E59005D0CA1 /* RequestListCard.swift */,
+				DFB4225A2BB275B800562BC3 /* enrolledStudentList.swift */,
+				DFB4225C2BB275DC00562BC3 /* enrolledStudentCard.swift */,
 			);
 			path = studentRelated;
 			sourceTree = "<group>";
@@ -460,6 +466,7 @@
 				0FC738432B8DE6E800566981 /* myProfileView.swift in Sources */,
 				0F3922682B8F20270019ECA5 /* addCoursePage.swift in Sources */,
 				0FC738592B8DE7C400566981 /* Notifications.swift in Sources */,
+				DFB4225D2BB275DC00562BC3 /* enrolledStudentCard.swift in Sources */,
 				0FC7384B2B8DE6F800566981 /* loginPageSwiftUIView.swift in Sources */,
 				0FC7385F2B8DE7D500566981 /* gradient header.swift in Sources */,
 				0FE4B9372B9052A6008CB61A /* classLocationSwiftUIView.swift in Sources */,
@@ -481,6 +488,7 @@
 				0FC738412B8DE6DC00566981 /* TeacherEnrolledClassList.swift in Sources */,
 				DFAB0B912BA258A400C012ED /* User.swift in Sources */,
 				0FC738612B8DE7D500566981 /* accentClassViewHeader.swift in Sources */,
+				DFB4225B2BB275B800562BC3 /* enrolledStudentList.swift in Sources */,
 				0FC738392B8DE6A400566981 /* appFonts.swift in Sources */,
 				DF578C7F2BA23E59005D0CA1 /* RequestListCard.swift in Sources */,
 				0FC738572B8DE78500566981 /* navBar.swift in Sources */,

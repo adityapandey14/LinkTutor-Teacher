@@ -24,7 +24,7 @@ struct homePageComplete: View {
             
             RequestList()
                 .tabItem {
-                    Label("Request" , systemImage: "cloud.fill")
+                    Label("Requests" , systemImage: "shared.with.you")
                 }
         }
         .accentColor(Color.accent)

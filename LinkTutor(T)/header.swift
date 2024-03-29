@@ -36,6 +36,14 @@ struct header: View{
     }
 }
 
+//struct adding: View{
+//    var body: some View{
+//        
+//    }
+//}
+//#Preview {
+//    adding()
+//}
 #Preview {
         header(yourName: "Emma")
 }

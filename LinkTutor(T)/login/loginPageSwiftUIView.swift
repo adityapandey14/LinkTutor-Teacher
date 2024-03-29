@@ -40,7 +40,7 @@ struct loginView: View {
                             NavigationLink(destination: signUpView()){
                                 Text("Sign up")
                                     .font(AppFont.mediumSemiBold)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.white)
                             }
                             Rectangle()
                                 .frame(width: 100, height: 3)

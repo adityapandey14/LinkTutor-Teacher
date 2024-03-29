@@ -1,93 +1,105 @@
 import SwiftUI
-import Firebase
-import FirebaseAuth
-import FirebaseFirestore
 
 struct enrolledClassCard: View {
     var documentId: String
     var className: String
     var days: [String]
-    var startTime: String
-    var endTime: String
-    @State var showingUpdateCourse = false
-    @EnvironmentObject var viewModel: AuthViewModel
+    var startTime: Date
+    var endTime: Date
+    @State private var showingUpdateCourse = false
     @ObservedObject var skillViewModel = SkillViewModel()
-    
+    @State private var showDeleteAlert = false
+
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return formatter
+    }
 
     var body: some View {
-        NavigationStack {
+        VStack(alignment: .leading, spacing: 10) {
+            Text(className)
+                .font(.headline)
+            
+            Text("Days")
+                .font(.subheadline)
+                .foregroundColor(.gray)
             HStack {
-                VStack(alignment: .leading) {
-                    Text("\(className)")
-                        .font(AppFont.mediumSemiBold)
-                    
-                    Text("Days")
-                        .font(AppFont.smallReg)
-                        .foregroundColor(.gray)
-                        .padding(.top, 1)
-                    HStack {
-                        ForEach(days, id: \.self) { data in
-                            Text("\(data)")
-                                .font(AppFont.smallReg)
-                        }
-                    }
-                    
-                    Text("Timing")
-                        .font(AppFont.smallReg)
-                        .foregroundColor(.gray)
-                        .padding(.top, 1)
-                    HStack {
-                        Text("\(startTime)")
-                            .font(AppFont.smallReg)
-                        Text("\(endTime)")
-                            .font(AppFont.smallReg)
-                    }
-                    
-                    HStack {
-                        NavigationLink(destination: updateCourse(documentId: documentId), isActive: $showingUpdateCourse) {
-                            Button(action: {
-                                // Update button action
-                                showingUpdateCourse = true
-                            }) {
-                                Text("Update")
-                                    .frame(minWidth: 90, minHeight: 30)
-                                    .background(Color.green)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(8.0)
-                            }
-                        }
-                        
-                        Button(action: {
-                            // Delete button action
-                            Task {
-                                await skillViewModel.deleteOwnerDetails(documentId: documentId)
-                            }
-                        }) {
-                            Text("Delete")
-                                .frame(minWidth: 90, minHeight: 30)
-                                .background(Color.red)
-                                .foregroundColor(.white)
-                                .cornerRadius(8.0)
-                        }
-                    }
+                ForEach(days, id: \.self) { day in
+                    Text(day)
+                        .font(.subheadline)
+                }
+            }
+            
+            Text("Timing")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+            Text("\(dateFormatter.string(from: startTime)) - \(dateFormatter.string(from: endTime))")
+                .font(.subheadline)
+            
+            HStack {
+                Button(action: {
+                    // Update button action
+                    showingUpdateCourse = true
+                }) {
+                    Text("Update")
+                        .frame(minWidth: 90, minHeight: 30)
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(8.0)
+                }
+                .sheet(isPresented: $showingUpdateCourse) {
+                    // Present the update course view here
+                    UpdateCourseView()
+                }
+
+                Button(action: {
+                    // Delete button action
+                    showDeleteAlert.toggle()
+                }) {
+                    Text("Delete")
+                        .frame(minWidth: 90, minHeight: 30)
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(8.0)
+                }
+                .alert(isPresented: $showDeleteAlert) {
+                    Alert(
+                        title: Text("Are you sure?"),
+                        message: Text("This action cannot be undone."),
+                        primaryButton: .destructive(Text("Delete")) {
+                            // Perform deletion action
+                            deleteClass()
+                        },
+                        secondaryButton: .cancel()
+                    )
                 }
                 Spacer()
             }
-            .frame(width: min(180,180), height: 160)
-            .fixedSize()
-            .padding()
-            .background(Color.accent)
-            .cornerRadius(10)
+        }
+        .padding()
+        .background(Color.gray.opacity(0.1))
+        .cornerRadius(10)
+        .padding()
+    }
+
+    func deleteClass() {
+        // Perform deletion logic using skillViewModel
+        Task {
+            await skillViewModel.deleteOwnerDetails(documentId: documentId)
         }
     }
 }
 
-#Preview {
-    enrolledClassCard(documentId: "", className: "Guitar", days: ["Mon", "Tue"], startTime: "4:00" , endTime: "5:00")
+struct UpdateCourseView: View {
+    var body: some View {
+        // Implement your update course view here
+        Text("Update Course View")
+    }
 }
 
-
-
-
-
-
+struct enrolledClassCard_Previews: PreviewProvider {
+    static var previews: some View {
+        enrolledClassCard(documentId: "", className: "Guitar", days: ["Mon", "Tue"], startTime: Date(), endTime: Date())
+    }
+}

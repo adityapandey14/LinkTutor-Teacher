@@ -31,8 +31,8 @@ struct SkillOwnerDetail: Identifiable, Codable , Equatable {
     var skillUid: String
     var teacherUid: String
     var week :  [String]
-    var startTime : String
-    var endTime : String
+    var startTime : Date
+    var endTime : Date
     var mode : String
     
     
@@ -107,8 +107,8 @@ class SkillViewModel: ObservableObject {
                     skillUid: data["skillUid"] as? String ?? "",
                     teacherUid: data["teacherUid"] as? String ?? "",
                     week: data["week"] as? [String] ?? [],
-                    startTime: data["startTime"] as? String ?? "",
-                    endTime: data["endTime"] as? String ?? "",
+                    startTime: data["startTime"] as?  Date ?? Date(),
+                    endTime: data["endTime"] as?  Date ?? Date(),
                     mode: data["mode"] as? String ?? ""
                 )
             }
@@ -166,8 +166,8 @@ class SkillViewModel: ObservableObject {
                             skillUid: data["skillUid"] as? String ?? "",
                             teacherUid: data["teacherUid"] as? String ?? "",
                             week: data["week"] as? [String] ?? [],
-                            startTime: data["startTime"] as? String ?? "",
-                            endTime: data["endTime"] as? String ?? "",
+                            startTime: data["startTime"] as? Date ?? Date(),
+                            endTime: data["endTime"] as?  Date ?? Date(),
                             mode: data["mode"] as? String ?? ""
                         )
                     }
@@ -234,8 +234,8 @@ class SkillViewModel: ObservableObject {
                             skillUid: data["skillUid"] as? String ?? "",
                             teacherUid: data["teacherUid"] as? String ?? "",
                             week: data["week"] as? [String] ?? [],
-                            startTime: data["startTime"] as? String ?? "",
-                            endTime: data["endTime"] as? String ?? "",
+                            startTime: data["startTime"] as?  Date ?? Date(),
+                            endTime: data["endTime"] as?  Date ?? Date(),
                             mode: data["mode"] as? String ?? ""
                         )
                     }
@@ -294,7 +294,7 @@ struct skillTypeView: View {
                                 .padding()
                                 .foregroundColor(.red)
                             
-                            enrolledClassCard(documentId: detail.id, className: detail.className, days: detail.week, startTime: detail.startTime, endTime: detail.endTime)
+//                            enrolledClassCard(documentId: detail.id, className: detail.className, days: detail.week, startTime: detail.startTime, endTime: detail.endTime)
                             // Add other fields as needed
                         }
                     }

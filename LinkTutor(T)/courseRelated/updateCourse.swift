@@ -21,7 +21,8 @@ struct updateCourse: View {
     @State private var selectedMode: ClassMode = .online
     @State private var selectedDays: [Day] = []
     @State private var isTeacherHomePageActive = false
-
+    @Environment(\.presentationMode) var presentationMode
+    
     enum ClassMode: String, CaseIterable {
         case online = "Online"
         case offline = "Offline"
@@ -40,29 +41,31 @@ struct updateCourse: View {
         
         
         NavigationStack{
-            
             VStack{
-                
-                VStack {
-                    Section(header: CustomSectionHeader(title: "Class Details")) {
+                List{
+                    Section(header: CustomSectionHeader(title: "Class Details").foregroundColor(.white)){
                         TextField("Skill Type", text: $skillType)
+                            .autocapitalization(.none)
+                            .cornerRadius(10)
                         TextField("Academy Name", text: $academyName)
+                            .cornerRadius(10)
                         TextField("Class Name", text: $className)
-                        
-                        
-                        // Choose Days VStack...
-                        
-                                    
-                        
-                        
-                        DatePicker("Start Time", selection: $startTime, displayedComponents: [ .hourAndMinute])
-                                            .datePickerStyle(.compact)
-                        
-                                        DatePicker("End Time", selection: $endTime, displayedComponents: [.hourAndMinute])
-                                            .datePickerStyle(.compact)
+                            .cornerRadius(10)
                     }
-                    .listRowBackground(Color.elavated)
+                    .listRowBackground(Color.darkbg)
                     
+                    // Choose Days
+                    Section{
+                        DatePicker("Start Time", selection: $startTime, displayedComponents: [ .hourAndMinute])
+                            .datePickerStyle(.compact)
+                            .font(AppFont.smallReg)
+                        DatePicker("End Time", selection: $endTime, displayedComponents: [.hourAndMinute])
+                            .datePickerStyle(.compact)
+                            .font(AppFont.smallReg)
+                    }
+                    .listRowBackground(Color.darkbg)
+                    
+                    //choose mode
                     Section(header: CustomSectionHeader(title: "Modes")) {
                         Picker("Select Mode", selection: $selectedMode) {
                             ForEach(ClassMode.allCases, id: \.self) { mode in
@@ -71,73 +74,79 @@ struct updateCourse: View {
                         }
                         .pickerStyle(SegmentedPickerStyle())
                     }
+                    .listRowBackground(Color.clear)
                     
-                    
-                    
-                }
-                .padding(.bottom, 10)
-                
-                VStack(alignment: .leading){
-                    Text("Choose Days")
-                    HStack {
-                        ForEach(Day.allCases, id: \.self) { day in
-                            Text(String(day.rawValue.first!))
-                                .bold()
-                                .foregroundColor(.white)
-                                .frame(width: 30, height: 30)
-                                .background(selectedDays.contains(day) ? Color.cyan.cornerRadius(10) : Color.gray.cornerRadius(10))
-                                .onTapGesture {
-                                    if selectedDays.contains(day) {
-                                        selectedDays.removeAll(where: {$0 == day})
-                                    } else {
-                                        selectedDays.append(day)
+                    //choose days
+                    Section(header: CustomSectionHeader(title: "Choose days").foregroundColor(.white)){
+                        HStack{
+                            Spacer()
+                            ForEach(Day.allCases, id: \.self) { day in
+                                Text(String(day.rawValue.first!))
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .frame(width: 30, height: 30)
+                                    .background(selectedDays.contains(day) ? Color.cyan.cornerRadius(10) : Color.gray.cornerRadius(10))
+                                    .onTapGesture {
+                                        if selectedDays.contains(day) {
+                                            selectedDays.removeAll(where: {$0 == day})
+                                        } else {
+                                            selectedDays.append(day)
+                                        }
                                     }
-                                }
+                            }
+                            .frame(maxWidth: .infinity)
+                            Spacer()
                         }
                     }
-                }
-                .padding(.bottom, 10)
-                
-                VStack(alignment : .leading){
+                    .listRowBackground(Color.clear)
                     
-                    Text("Fees")
-                        .fontWeight(.bold)
-                        .font(.system(size: 20).weight(.bold))
-                        .fontDesign(.rounded)
-                    TextField("Class Fee", value: $classFee, formatter: NumberFormatter())
-                        .keyboardType(.numberPad)
-                }
+                    
+                    //Fee
+                    Section(header: CustomSectionHeader(title: "Fee per month").foregroundColor(.white)){
+                        TextField("Class Fee", value: $classFee, formatter: NumberFormatter())
+                            .keyboardType(.numberPad)
+                    }
+                    .listRowBackground(Color.darkbg)
+                    
+                    //update button
+                    HStack{
+                        Spacer()
+                        Button(action: {
+                            // Handle add class action
+                            viewModel.updateCourseData(
+                                skillType: skillType,
+                                academyName: academyName,
+                                className: className,
+                                mode: selectedMode.rawValue,
+                                fees: classFee,
+                                week: selectedDays.map { $0.rawValue },
+                                startTime: startTime.description,
+                                endTime: endTime.description,
+                                documentId: documentId
+                            )
+                            
+                            // Activate the navigation to TeacherHomePage
+                            isTeacherHomePageActive = true
+                            presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Text("Update Class")
+                                .foregroundColor(.black)
+                                .font(AppFont.mediumSemiBold)
+                        }
+                        .frame(width:250, height: 25)
+                        .padding()
+                        .background(Color.accent)
+                        .cornerRadius(50)
+                        Spacer()
+                    }
+                    .listRowBackground(Color.clear)
+                }//liend
+                .scrollContentBackground(.hidden)
+                .font(AppFont.smallReg)
                 
-                Spacer()
-                Button(action: {
-                       // Handle add class action
-                       viewModel.updateCourseData(
-                           skillType: skillType,
-                           academyName: academyName,
-                           className: className,
-                           mode: selectedMode.rawValue,
-                           fees: classFee,
-                           week: selectedDays.map { $0.rawValue },
-                           startTime: startTime.description,
-                           endTime: endTime.description, 
-                           documentId: documentId
-                       )
-
-                       // Activate the navigation to TeacherHomePage
-                       isTeacherHomePageActive = true
-                   }) {
-                       Text("Update Class")
-                           .foregroundColor(.white)
-                           .font(AppFont.mediumSemiBold)
-                           .padding()
-                           .background(Color.blue)
-                           .cornerRadius(20)
-                   }
-                
-                
-            }
+            }//vend
+            .background(Color.background)
         }
-        .padding()
     }
 }
 
