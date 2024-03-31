@@ -1,11 +1,12 @@
 import SwiftUI
+import Firebase
 
 struct enrolledClassCard: View {
     var documentId: String
     var className: String
     var days: [String]
-    var startTime: Date
-    var endTime: Date
+    var startTime: Date // Change to Date
+    var endTime: Date // Change to Date
     @State private var showingUpdateCourse = false
     @ObservedObject var skillViewModel = SkillViewModel()
     @State private var showDeleteAlert = false
@@ -17,70 +18,83 @@ struct enrolledClassCard: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(className)
-                .font(.headline)
-            
-            Text("Days")
-                .font(.subheadline)
-                .foregroundColor(.gray)
-            HStack {
-                ForEach(days, id: \.self) { day in
-                    Text(day)
-                        .font(.subheadline)
-                }
-            }
-            
-            Text("Timing")
-                .font(.subheadline)
-                .foregroundColor(.gray)
-            Text("\(dateFormatter.string(from: startTime)) - \(dateFormatter.string(from: endTime))")
-                .font(.subheadline)
-            
-            HStack {
-                Button(action: {
-                    // Update button action
-                    showingUpdateCourse = true
-                }) {
-                    Text("Update")
-                        .frame(minWidth: 90, minHeight: 30)
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(8.0)
-                }
-                .sheet(isPresented: $showingUpdateCourse) {
-                    // Present the update course view here
-                    UpdateCourseView()
-                }
-
-                Button(action: {
-                    // Delete button action
-                    showDeleteAlert.toggle()
-                }) {
-                    Text("Delete")
-                        .frame(minWidth: 90, minHeight: 30)
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(8.0)
-                }
-                .alert(isPresented: $showDeleteAlert) {
-                    Alert(
-                        title: Text("Are you sure?"),
-                        message: Text("This action cannot be undone."),
-                        primaryButton: .destructive(Text("Delete")) {
-                            // Perform deletion action
-                            deleteClass()
-                        },
-                        secondaryButton: .cancel()
-                    )
-                }
+        NavigationLink(destination : enrolledLandingPage(id : id , skillUid: skillUid, skillOwnerDetailsUid: skillOwnerDetailsUid , className: className , teacherUid: teacherUid)){
+            HStack{
+                VStack(alignment: .leading) {
+                    Text(className)
+                        .font(AppFont.smallSemiBold)
+                    
+                    Spacer().frame(height: 10)
+                    
+                    Text("Days")
+                        .font(AppFont.smallSemiBold)
+                        .foregroundColor(.gray)
+                    HStack {
+                        ForEach(days, id: \.self) { day in
+                            Text(day)
+                                .font(AppFont.smallReg)
+                        }
+                    }
+                    
+                    Text("Timing")
+                        .font(AppFont.smallSemiBold)
+                        .foregroundColor(.gray)
+                    HStack{
+                        Text(formattedTimingWithoutDay(date: startTime))
+                        Text("-")
+                        Text(formattedTimingWithoutDay(date: startTime))
+                    }
+                    .font(AppFont.smallReg)
+                    Spacer()
+                }//v end
                 Spacer()
+                VStack{
+                    Button(action: {
+                        // Update button action
+                        showingUpdateCourse = true
+                    }) {
+                        Text("Update")
+                            .font(AppFont.actionButton)
+                            .frame(width: 70, height: 25)
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(8.0)
+                    }
+                    .sheet(isPresented: $showingUpdateCourse) {
+                        // Present the update course view here
+                        UpdateCourseView()
+                    }
+                    
+                    Button(action: {
+                        // Delete button action
+                        showDeleteAlert.toggle()
+                    }) {
+                        Text("Delete")
+                            .font(AppFont.actionButton)
+                            .frame(width: 70, height: 25)
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                    .alert(isPresented: $showDeleteAlert) {
+                        Alert(
+                            title: Text("Are you sure?"),
+                            message: Text("This action cannot be undone."),
+                            primaryButton: .destructive(Text("Delete")) {
+                                // Perform deletion action
+                                deleteClass()
+                            },
+                            secondaryButton: .cancel()
+                        )
+                    }
+                    Spacer()
+                }
             }
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: 140)
+            .background(Color.elavated)
+            .cornerRadius(10)
         }
-        .padding()
-        .background(Color.gray.opacity(0.1))
-        .cornerRadius(10)
-        .padding()
     }
 
     func deleteClass() {
@@ -89,6 +103,12 @@ struct enrolledClassCard: View {
             await skillViewModel.deleteOwnerDetails(documentId: documentId)
         }
     }
+}
+
+private func formattedTimingWithoutDay(date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "h:mm a"
+    return formatter.string(from: date)
 }
 
 struct UpdateCourseView: View {

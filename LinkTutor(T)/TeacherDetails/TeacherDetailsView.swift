@@ -2,7 +2,7 @@
 //  TeacherDetailsView.swift
 //  LinkTutor(T)
 //
-//  Created by Aditya Pandey on 19/03/24.
+//  Created by Aditya Pandey on 29/03/24.
 //
 
 import SwiftUI
@@ -190,4 +190,3 @@ struct TeacherDetailsView_Previews: PreviewProvider {
 //            }
 //        }
 //    }
-

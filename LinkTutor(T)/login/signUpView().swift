@@ -157,7 +157,7 @@ struct signUpView: View {
                 }
                 .padding()
                 .background(Color.background)
-                .environment(\.colorScheme, .dark)
+//                .environment(\.colorScheme, .dark)
         }
         .navigationBarTitle("")
         .navigationBarHidden(true)

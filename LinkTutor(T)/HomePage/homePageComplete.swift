@@ -26,13 +26,23 @@ struct homePageComplete: View {
                 .tabItem {
                     Label("Requests" , systemImage: "shared.with.you")
                 }
+            
+           teacherSubjectList()
+                .tabItem {
+                    Label("Students" , systemImage: "shared.with.you")
+                }
+            
+            classLandingPage()
+                 .tabItem {
+                     Label("classLanding" , systemImage: "shared.with.you")
+                 }
         }
         .accentColor(Color.accent)
     }
     .tint(Color.accent)
     .accentColor(Color.accent)
     //.navigationBarHidden(false)
-    .preferredColorScheme(.dark)
+//    .preferredColorScheme(.dark)
 }
 }
 

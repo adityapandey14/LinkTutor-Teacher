@@ -11,8 +11,8 @@ struct enrolledClassCardList: View {
 
     var body: some View {
         NavigationStack {
-            VStack{
-                HStack{
+            VStack {
+                HStack {
                     Text("My Classes")
                         .font(AppFont.largeBold)
                     Spacer()
@@ -20,16 +20,16 @@ struct enrolledClassCardList: View {
                 ScrollView {
                     ForEach(skillViewModel.skillTypes) { skillType in
                         VStack(alignment: .leading, spacing: 10) {
-                                ForEach(skillType.skillOwnerDetails) { detail in
-                                    if detail.teacherUid == userId {
-                                        enrolledClassCard(documentId: detail.id,
-                                                          className: detail.className,
-                                                          days: detail.week,
-                                                          startTime: detail.startTime,
-                                                          endTime: detail.endTime)
-                                    }
+                            ForEach(skillType.skillOwnerDetails) { detail in
+                                if detail.teacherUid == userId {
+                                    enrolledClassCard(documentId: detail.id,
+                                                      className: detail.className,
+                                                      days: detail.week,
+                                                      startTime: detail.startTime.dateValue(), // Convert to Date
+                                                      endTime: detail.endTime.dateValue()) // Convert to Date
                                 }
                             }
+                        }
                         .onAppear {
                             // Fetch user ID and trigger fetching enrolled details
                             if let currentUser = Auth.auth().currentUser {
@@ -38,13 +38,12 @@ struct enrolledClassCardList: View {
                             }
                         }
                     }
-                }//scroll end
-            }//vend
+                } // Scroll end
+            } // VStack end
             .padding()
             .background(Color.background)
         }
     }
-        
 
     private func fetchEnrolledDetails(for skillType: SkillType) {
         // Ensure fetching is performed only once

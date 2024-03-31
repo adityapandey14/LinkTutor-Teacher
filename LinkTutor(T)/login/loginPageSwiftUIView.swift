@@ -101,7 +101,7 @@ struct loginView: View {
                 }
                 .padding()
                 .background(Color.background)
-                .environment(\.colorScheme, .dark)
+//                .environment(\.colorScheme, .dark)
         }
         .navigationBarBackButtonHidden()
     }

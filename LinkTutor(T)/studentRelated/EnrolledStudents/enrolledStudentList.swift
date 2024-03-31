@@ -10,6 +10,7 @@ import Firebase
 
 struct enrolledStudentList: View {
     @StateObject var viewModel = RequestListViewModel()
+    var className : String
     
     var body: some View {
         NavigationStack {
@@ -23,7 +24,7 @@ struct enrolledStudentList: View {
                 let userId = Auth.auth().currentUser?.uid
                 
                 VStack(spacing: 10) {
-                    let filteredStudents = viewModel.enrolledStudents.filter { $0.teacherUid == userId && $0.requestAccepted == 1 }
+                    let filteredStudents = viewModel.enrolledStudents.filter { $0.teacherUid == userId && $0.requestAccepted == 1 && $0.className == className}
                        
                        ForEach(filteredStudents, id: \.id) { student in
                            enrolledStudentCard(studentName: student.studentName,
@@ -37,7 +38,7 @@ struct enrolledStudentList: View {
                 }
                 .onAppear {
                     Task {
-                        await viewModel.fetchEnrolledStudents()
+                        viewModel.fetchEnrolledStudents()
                     }
                 }
                 
@@ -51,6 +52,6 @@ struct enrolledStudentList: View {
 
 struct enrolledStudentList_Previews: PreviewProvider {
     static var previews: some View {
-        enrolledStudentList()
+        enrolledStudentList(className: "ClassName")
     }
 }

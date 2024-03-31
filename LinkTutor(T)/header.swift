@@ -11,8 +11,8 @@ struct header: View{
                             Text("Hi")
                             Text(yourName)
                         }
-                            .foregroundStyle(Color.white)
-                            .font(AppFont.largeBold)
+                        .foregroundColor(.black)
+                        .font(AppFont.largeBold)
 //                            .padding(.bottom, 1)
                         Spacer()
                         //myProfileView
@@ -21,17 +21,16 @@ struct header: View{
                                 .resizable()
                                 .clipped()
                                 .frame(width: 50, height: 50)
-                                .foregroundColor(.white)
+                                .foregroundColor(.gray)
                         }
                     }
                     Text("Ready to inspire minds today?")
-                        .foregroundStyle(Color.white)
+                        .foregroundStyle(Color.black)
                         .font(AppFont.mediumReg)
                 }
                 Spacer()
-                
-                
             }
+            .foregroundColor(.black)
         }
     }
 }

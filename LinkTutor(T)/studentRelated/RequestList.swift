@@ -83,17 +83,14 @@ class RequestListViewModel: ObservableObject {
                        let studentNumber = studentData["studentNumber"] as? Int,
                        let requestAccepted = studentData["RequestAccepted"] as? Int ,
                        let requestSent = studentData["RequestSent"] as? Int ,
-                        let className = studentData["className"] as? String ,
-                    let teacherNumber = studentData["teacherNumber"] as? Int ,
-                        let teacherUid = studentData["teacherUid"] as? String ,
-                       
+                       let className = studentData["className"] as? String ,
+                       let teacherNumber = studentData["teacherNumber"] as? Int ,
+                       let teacherUid = studentData["teacherUid"] as? String ,
                        let skillUid = studentData["skillUid"] as? String ,
-                       var startTime = studentData["startTime"] as? Timestamp  ,
-                       
+                       let startTime = studentData["startTime"] as? Timestamp  ,
                        let  week = studentData["week"] as? [String],
-                       var enrolledDate = studentData["enrolledDate"] as? Timestamp
-                        
-                    
+                       let enrolledDate = studentData["enrolledDate"] as? Timestamp
+
                     {
                         let enrolledStudent = EnrolledStudent(id: id,
                                                               teacherName: teacherName,
@@ -103,8 +100,8 @@ class RequestListViewModel: ObservableObject {
                                                               studentNumber: studentNumber,
                                                               requestAccepted: requestAccepted,
                                                               requestSent: requestSent ,
-                                                                 className:  className ,
-                                                                   teacherNumber: teacherNumber,
+                                                              className:  className ,
+                                                              teacherNumber: teacherNumber,
                                                               teacherUid: teacherUid,
                                                               skillUid: skillUid,
                                                               startTime: startTime ,
@@ -140,7 +137,7 @@ class RequestListViewModel: ObservableObject {
     func deleteEnrolled(id: String) {
         let db = Firestore.firestore()
         
-        let updatedData: [String: Any] = [
+        let _: [String: Any] = [
             "RequestSent": 0, // or any appropriate value indicating deletion
             "RequestAccepted":  0 // or any appropriate value indicating rejection or deletion
         ]

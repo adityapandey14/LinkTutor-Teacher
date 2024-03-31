@@ -65,7 +65,7 @@ struct RequestListCard: View {
                         // Delete button action
                         showAcceptAlert.toggle()
                         Task {
-                            await viewModel.updateEnrolled(requestAccepted: 1, requestSent: 0, id: id)
+                             viewModel.updateEnrolled(requestAccepted: 1, requestSent: 0, id: id)
                         }
                         
                     }) {
@@ -103,7 +103,7 @@ struct RequestListCard: View {
                             message: Text("Are you sure?"),
                             primaryButton: .destructive(Text("Delete")) {
                                 Task {
-                                    await viewModel.deleteEnrolled(id: id)
+                                     viewModel.deleteEnrolled(id: id)
                                 }
                             },
                             secondaryButton: .cancel()
