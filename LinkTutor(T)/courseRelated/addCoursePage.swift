@@ -10,10 +10,11 @@ struct CustomSectionHeader: View {
     var body: some View {
         HStack{
             Text(title)
-                .font(AppFont.mediumSemiBold)
+                .font(AppFont.smallSemiBold)
                 .textCase(.none)// Customize background color as needed
             Spacer()
         }
+        .foregroundColor(.black)
     }
 }
 

@@ -6,7 +6,8 @@ import FirebaseStorage
 struct ProfileInputView: View {
     
     @EnvironmentObject var viewModel: AuthViewModel
-  
+    
+    
     @State private var fullName: String = ""
     @State private var email: String = ""
     @State private var city: String = ""
@@ -14,14 +15,13 @@ struct ProfileInputView: View {
     @State private var about: String = ""
     @State private var occupation : String = ""
     @State private var age : String = ""
-
-  
-    @State private var location: GeoPoint = GeoPoint(latitude: 12.8096, longitude: 80.8097)
     
+
+    @State private var location: GeoPoint = GeoPoint(latitude: 12.8096, longitude: 80.8097)
     @State var isPickerShowing = false
     @State var selectedImage: UIImage?
-    
     @State private var isProfileIsSubmit = false
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
        
@@ -60,7 +60,7 @@ struct ProfileInputView: View {
                 
                 
                 List{
-                    Section(header: CustomSectionHeader(title: "About").foregroundColor(.white)){
+                    Section(header: CustomSectionHeader(title: "About").foregroundColor(.black)){
                         
                         // Name TextField
                         TextField("Name", text: $fullName)
@@ -76,7 +76,7 @@ struct ProfileInputView: View {
                             .listRowBackground(Color.darkbg)
                     }
                     
-                    Section(header: CustomSectionHeader(title: "Personal").foregroundColor(.white)){
+                    Section(header: CustomSectionHeader(title: "Personal").foregroundColor(.black)){
                         //age
                         TextField("Age", text: $age)
                             .listRowBackground(Color.darkbg)
@@ -87,7 +87,7 @@ struct ProfileInputView: View {
                             .autocapitalization(.none)
                     }
                     
-                    Section(header: CustomSectionHeader(title: "Phone Number").foregroundColor(.white)){
+                    Section(header: CustomSectionHeader(title: "Phone Number").foregroundColor(.black)){
                         // Password SecureField
                         TextField("PhoneNumber", value: $phoneNumber, formatter: NumberFormatter())
                             .keyboardType(.numberPad)
@@ -98,35 +98,30 @@ struct ProfileInputView: View {
                 .background(Color.background)
                 .scrollContentBackground(.hidden)
                 
-                NavigationLink(destination: homePageComplete(), isActive: $isProfileIsSubmit) {
-                    Button(action: {
-                        // Handle add class action
-                        viewModel.updateTeacherProfile(fullName: fullName,
-                                                       email: email,
-                                                       aboutParagraph: about,
-                                                       age: age,
-                                                       city: city,
-                                                       location: location,
-                                                       occupation: occupation,
-                                                       phoneNumber: phoneNumber ,
-                                                       selectedImage: selectedImage)
-                        // Activate the navigation to TeacherHomePage
-                        
-                        
-                        isProfileIsSubmit = true
-                    }) {
-                        Text("Submit Profile")
-                            .foregroundColor(.black)
-                            .font(AppFont.mediumSemiBold)
-                    }
-                    .frame(width:250, height: 25)
-                    .padding()
-                    .background(Color.accent)
-                    .cornerRadius(50)
-                }
-               
                 // Submit Button
-               
+                Button(action: {
+                    // Handle add class action
+                    viewModel.updateTeacherProfile(fullName: fullName,
+                                                   email: email,
+                                                   aboutParagraph: about,
+                                                   age: age,
+                                                   city: city,
+                                                   location: location,
+                                                   occupation: occupation,
+                                                   phoneNumber: phoneNumber ,
+                                                   selectedImage: selectedImage)
+                    // Activate the navigation to TeacherHomePage
+                    isProfileIsSubmit = true
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text("Submit Profile")
+                        .foregroundColor(.white)
+                        .font(AppFont.mediumSemiBold)
+                }
+                .frame(width:250, height: 25)
+                .padding()
+                .background(Color.accent)
+                .cornerRadius(50)
                 
             } //v end
             .background(Color.background)

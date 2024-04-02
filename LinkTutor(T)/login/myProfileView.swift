@@ -35,6 +35,7 @@ struct myProfileView: View {
                                 .frame(width: 70, height: 70)
                                 .cornerRadius(50)
                                 .padding(.trailing, 5)
+                                .foregroundStyle(Color.gray)
                         }
                         .frame(width: 90, height: 90)
                     } else {
@@ -44,6 +45,7 @@ struct myProfileView: View {
                             .frame(width: 70, height: 70)
                             .cornerRadius(50)
                             .padding(.trailing, 5)
+                            .foregroundStyle(Color.gray)
                     }
                     
                     if let user = viewModel.currentUser {
@@ -76,7 +78,7 @@ struct myProfileView: View {
                 }
                 .padding()
                 .frame(width: 350, height: 100)
-                .background(Color.accent)
+                .background(Color.elavated)
                 .cornerRadius(20)
                 
                 List{
@@ -126,7 +128,7 @@ struct myProfileView: View {
                     } label: {
                         Text("Logout")
                             .font(AppFont.mediumSemiBold)
-                            .foregroundStyle(Color.white)
+                            .foregroundStyle(Color.black)
                             .frame(width: 250, height: 35)
                             .padding()
                             .background(Color.elavated)

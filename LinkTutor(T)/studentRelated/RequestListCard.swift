@@ -30,15 +30,17 @@ struct RequestListCard: View {
                         .font(AppFont.mediumSemiBold)
                         .foregroundStyle(Color.black)
                     
-                    Text("\(className)")
-                        .font(AppFont.smallSemiBold)
+                    Text("For \(className)")
+                        .font(AppFont.smallReg)
                         .foregroundStyle(Color.black)
+                    
+                    Spacer()
                     
                     HStack {
                         Image(systemName: "phone.fill")
                             .font(.system(size: 17))
                         
-                        Text("\(phoneNumber)")
+                        Text(String("\(phoneNumber)"))
                             .font(AppFont.actionButton)
                     }
                     .padding([.top, .bottom], 6)
@@ -70,7 +72,8 @@ struct RequestListCard: View {
                         
                     }) {
                         Text("Accept")
-                            .frame(minWidth: 90, minHeight: 30)
+                            .font(AppFont.actionButton)
+                            .frame(width: 70, height: 25)
                             .background(Color.green)
                             .foregroundColor(.white)
                             .cornerRadius(8.0)
@@ -92,7 +95,8 @@ struct RequestListCard: View {
                         
                     }) {
                         Text("Delete")
-                            .frame(minWidth: 90, minHeight: 30)
+                            .font(AppFont.actionButton)
+                            .frame(width: 70, height: 25)
                             .background(Color.red)
                             .foregroundColor(.white)
                             .cornerRadius(8.0)
@@ -109,13 +113,14 @@ struct RequestListCard: View {
                             secondaryButton: .cancel()
                         )
                     }
+                    Spacer()
                 }
                 
             }// hstack end
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .fixedSize(horizontal: false, vertical: true) // Allow vertical expansion only
             .padding()
-            .background(Color.accentColor)
+            .background(Color.elavated)
             .cornerRadius(10)
         }
     }

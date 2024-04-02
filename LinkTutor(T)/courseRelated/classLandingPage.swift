@@ -14,24 +14,25 @@ struct classLandingPage: View {
     @State private var userId: String?
     
     var body: some View {
-        ScrollView {
-            ForEach(viewModel.skillTypes) { skillType in
-                VStack(alignment: .leading) {
-                    self.skillTypeVStack(skillType: skillType)
+        VStack{
+            ScrollView {
+                ForEach(viewModel.skillTypes) { skillType in
+                    VStack(alignment: .leading) {
+                        self.skillTypeVStack(skillType: skillType)
+                    }
+                    .onAppear() {
+                        userId = Auth.auth().currentUser?.uid
+                        viewModel.fetchSkillOwnerDetails(for: skillType)
+                    }
                 }
-                .onAppear() {
-                    userId = Auth.auth().currentUser?.uid
-                    viewModel.fetchSkillOwnerDetails(for: skillType)
-                }
-                .padding()
             }
         }
-    }
+    } //body
     
     func skillTypeVStack(skillType: SkillType) -> some View {
         VStack(alignment: .leading) {
             ForEach(skillType.skillOwnerDetails.filter { $0.teacherUid == userId }) { detail in
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 10) {
                     self.detailNavigationLink(detail: detail)
                 }
             }
@@ -40,15 +41,18 @@ struct classLandingPage: View {
     
     func detailNavigationLink(detail: SkillOwnerDetail) -> some View {
         NavigationLink(destination: LandingPageCard(academy: detail.academy,
+                                                    documentId: detail.id,
                                                      className: detail.className,
                                                      startTime: detail.startTime.dateValue(), // Convert to Date
                                                      endTime: detail.endTime.dateValue(), // Convert to Date
                                                      week: detail.week,
                                                      mode: detail.mode,
                                                      price: Int(detail.price))) {
-            Text("Class Name: \(detail.className)")
-                .padding()
-                .foregroundColor(.red)
+            enrolledClassCard(documentId: detail.id,
+                              className: detail.className,
+                              days: detail.week,
+                              startTime: detail.startTime.dateValue(),
+                              endTime: detail.endTime.dateValue())
         }
     }
 }
@@ -61,6 +65,7 @@ struct classLandingPage_Previews: PreviewProvider {
 
 struct LandingPageCard: View {
     var academy: String
+    var documentId: String
     var className: String
     var startTime: Date // Changed to Date
     var endTime: Date // Changed to Date
@@ -68,25 +73,190 @@ struct LandingPageCard: View {
     var mode: String
     var price: Int
     
+    @State private var showingUpdateCourse = false
+    @State private var showingStudentList = false
+    
+    @ObservedObject var reviewViewModel = ReviewViewModel()
     @ObservedObject var teacherViewModel = TeacherViewModel.shared
     let userId = Auth.auth().currentUser?.uid
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Academy: \(academy)")
-            Text("Class Name: \(className)")
-            Text("Start Time: \(formattedDate(startTime))")
-            Text("End Time: \(formattedDate(endTime))")
-            Text("Week: \(week.joined(separator: ", "))")
-            Text("Mode: \(mode)")
-            Text("Price: \(price)")
+            //header
+            HStack{
+                VStack(alignment: .leading) {
+                    Text("\(className)")
+                        .font(AppFont.largeBold)
+                    
+                    if let teacherDetails = teacherViewModel.teacherDetails.first {
+                        Text("by \(teacherDetails.fullName)")
+                            .font(AppFont.mediumReg)
+                    } else {
+                        Text("Loading...")
+                            .font(AppFont.mediumReg)
+                    }
+                }
+                .padding(.horizontal)
+                Spacer()
+            }
             
+            //STARS
+//            HStack {
+//                let reviewsForSkillOwner = reviewViewModel.reviewDetails.filter { $0.teacherUid == teacherUid && $0.skillOwnerDetailsUid == skillOnwerDetailsUid }
+//                                                      
+//                if !reviewsForSkillOwner.isEmpty {
+//                    let averageRating = reviewsForSkillOwner.reduce(0.0) { $0 + Double($1.ratingStar) } / Double(reviewsForSkillOwner.count)
+//                    
+//                    Text("\(averageRating, specifier: "%.1f") ⭐️")
+//                        .padding([.top, .bottom], 4)
+//                        .padding([.leading, .trailing], 12)
+//                        .background(Color.elavated)
+//                        .cornerRadius(50)
+//                    
+//                    Text("\(reviewsForSkillOwner.count) Review\(reviewsForSkillOwner.count == 1 ? "" : "s")")
+//                        .font(AppFont.smallReg)
+//                        .foregroundColor(.black).opacity(0.6)
+//                } else {
+//                    Text("No Review")
+//                        .font(AppFont.smallReg)
+//                        .foregroundColor(.black)
+//                }
+//                Spacer()
+//            }
+//            .padding(.leading, 5)
+            
+            HStack{
+                //update
+                Button(action: {
+                    //action
+                    showingUpdateCourse = true
+                }) {
+                    Text("Update details")
+                        .font(AppFont.smallReg)
+                        .foregroundColor(.white)
+                        .padding(10)
+                        .padding(.horizontal)
+                }
+                .background(Color.accent)
+                .cornerRadius(20)
+//                .padding([.top, .bottom], 10)
+//                .padding(.leading, 5)
+                .sheet(isPresented: $showingUpdateCourse) {
+                    // Present the update course view here
+                    updateCourse(documentId: documentId)
+                }
+                
+                //students list
+                Button(action: {
+                    //action
+                    showingStudentList = true
+                }) {
+                    Text("Students enrolled")
+                        .font(AppFont.smallReg)
+                        .foregroundColor(.black)
+                        .padding(10)
+                        .padding(.horizontal)
+                }
+                .background(Color.elavated)
+                .cornerRadius(20)
+//                .padding([.top, .bottom], 10)
+//                .padding(.leading, 5)
+                .sheet(isPresented: $showingStudentList) {
+                    // Present the update course view here
+                    enrolledStudentList(className: className)
+                }
+            }
+            // QuickInfoBox
             let teacherDetails = teacherViewModel.teacherDetails.first(where: { $0.id == userId })
             if let teacherDetails = teacherDetails {
-                Text(teacherDetails.email)
-                Text(teacherDetails.fullName)
+                quickInfoCard(tutorAddress: "\(teacherDetails.city)".capitalized, startTime: startTime, endTime: endTime , tutionFee: price )
+                    .padding([.top, .bottom], 10)
             }
+            
+            //modes
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("Mode")
+                        .font(AppFont.mediumSemiBold)
+                        .padding(.bottom, 5)
+                        .padding(.top)
+                    VStack {
+                        if mode == "both" {
+                            HStack {
+                                Image(systemName: "checkmark")
+                                    .font(.system(size: 20))
+                                    .foregroundStyle(Color.black).opacity(0.6)
+                                Text("Online")
+                                    .font(AppFont.smallReg)
+                                    .foregroundColor(.gray)
+                                Spacer()
+                            }.padding(5)
+                            HStack {
+                                Image(systemName: "checkmark")
+                                    .font(.system(size: 20))
+                                    .foregroundStyle(Color.black).opacity(0.6)
+                                Text("Offline")
+                                    .font(AppFont.smallReg)
+                                    .foregroundColor(.gray)
+                                Spacer()
+                            }.padding(5)
+                        }
+                        else{
+                            HStack {
+                                Image(systemName: "checkmark")
+                                    .font(.system(size: 20))
+                                    .foregroundStyle(Color.black).opacity(0.6)
+                                Text("\(mode)".capitalized)
+                                    .font(AppFont.smallReg)
+                                    .foregroundColor(.black)
+                                Spacer()
+                            }.padding(5)
+                        }
+                    }
+                }
+                Spacer()
+            }
+            
+            //REVIEWS
+//            let teacherDetails = teacherViewModel.teacherDetails.first(where: { $0.id == userId })
+//            if let teacherDetails = teacherDetails {
+//                //reviews
+//                HStack {
+//                    VStack(alignment: .leading) {
+//                        Text("Reviews")
+//                            .font(AppFont.mediumSemiBold)
+//                            .padding(.bottom, 5)
+//                            .padding(.top)
+//
+//                        ForEach(reviewViewModel.reviewDetails.filter { $0.skillUid == "\(teacherDetails.skillUid)" && $0.teacherUid == "\(userId)" && $0.skillOwnerDetailsUid == "\(skillOwnerUid)" }) { teacherDetail in
+//
+//                            if let formattedDate = formatDate(teacherDetail.time) {
+//                                reviewCard(reviewRating: teacherDetail.ratingStar , review: "\(teacherDetail.comment)", time: "\(formattedDate)")
+//                            }
+//                        }// End of For loop
+//                    }
+//                    .padding([.top, .bottom], 10)
+//                    Spacer()
+//                }
+//                Spacer()
+//            }
+            
+            
+            Spacer()
         }
+        .padding()
+        .background(Color.background)
+    }
+    func formatDate(_ date: Date) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM YYYY" // Date format: dayOfMonth month
+        return dateFormatter.string(from: date)
+    }
+    
+    func formatDateTime(_ date: Date) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a" // Date format: dayOfMonth month year hour:minute AM/PM
+        return dateFormatter.string(from: date)
     }
     
     private func formattedDate(_ date: Date) -> String {

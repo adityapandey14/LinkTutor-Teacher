@@ -16,10 +16,13 @@ struct enrolledStudentList: View {
         NavigationStack {
             VStack {
                 HStack {
-                    Text("Enrolled Subject")
-                        .font(AppFont.largeBold)
+                    Spacer()
+                    Text(className)
+                        .font(AppFont.mediumSemiBold)
                     Spacer()
                 }
+                .padding(.bottom)
+                .foregroundStyle(Color.black)
                 
                 let userId = Auth.auth().currentUser?.uid
                 

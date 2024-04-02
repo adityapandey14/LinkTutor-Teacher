@@ -37,9 +37,8 @@ struct TeacherHomePage: View {
                         .foregroundColor(Color.white)
                         .cornerRadius(20)
                     }
-                    .padding(.top)
+                    .sheet(isPresented: $isPresentingAddCourseSheet) {addCoursePage()}
                 }
-                .padding(.bottom, 10)
                 .onAppear {
                     Task {
                         let userId = Auth.auth().currentUser?.uid
@@ -60,6 +59,7 @@ struct TeacherHomePage: View {
                     // Today's classes cards
                     ScrollView(.horizontal, showsIndicators: false) {
                         if let classesForSelectedDate = classesForToday(), !classesForSelectedDate.isEmpty {
+
                             VStack {
                                 ForEach(classesForSelectedDate.filter { $0.teacherUid == userId && $0.requestAccepted == 1 }, id: \.id) { enrolledClass in
                                     calenderPage(className: enrolledClass.className, tutorName: enrolledClass.teacherName, startTime: enrolledClass.startTime.dateValue())
@@ -81,32 +81,33 @@ struct TeacherHomePage: View {
                     SectionHeader(sectionName: "My classes", fileLocation: enrolledClassCardList())
 
                     // My classes cards
-                    ScrollView(.vertical, showsIndicators: false) {
-                        ForEach(skillViewModel.skillTypes) { skillType in
-                            VStack() {
-                                ForEach(skillType.skillOwnerDetails) { detail in
-                                    if detail.teacherUid == userId {
-                                        enrolledClassCard(documentId: detail.id,
-                                                          className: detail.className,
-                                                          days: detail.week,
-                                                          startTime: detail.startTime.dateValue(),
-                                                          endTime: detail.endTime.dateValue())
-                                    }
-                                }
-                            }
-                            .onAppear {
-                                // Fetch user ID and trigger fetching enrolled details
-                                if let currentUser = Auth.auth().currentUser {
-                                    userId = currentUser.uid
-                                    fetchEnrolledDetails(for: skillType)
-                                }
-                            }
-                        }
-                    }
+                    classLandingPage()
+//                    ScrollView(.vertical, showsIndicators: false) {
+//                        ForEach(skillViewModel.skillTypes) { skillType in
+//                            VStack() {
+//                                ForEach(skillType.skillOwnerDetails) { detail in
+//                                    if detail.teacherUid == userId {
+//                                        enrolledClassCard(documentId: detail.id,
+//                                                          className: detail.className,
+//                                                          days: detail.week,
+//                                                          startTime: detail.startTime.dateValue(),
+//                                                          endTime: detail.endTime.dateValue())
+//                                    }
+//                                }
+//                            }
+//                            .onAppear {
+//                                // Fetch user ID and trigger fetching enrolled details
+//                                if let currentUser = Auth.auth().currentUser {
+//                                    userId = currentUser.uid
+//                                    fetchEnrolledDetails(for: skillType)
+//                                }
+//                            }
+//                        }
+//                    }
                 }
                 Spacer()
             } //vend
-            .padding()
+            .padding([.horizontal, .bottom])
             .background(Color.background)
         }
         .onAppear {

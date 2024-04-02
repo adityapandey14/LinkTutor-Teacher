@@ -17,6 +17,7 @@ struct enrolledStudentCard: View {
     var teacherUid: String
     var skillUid: String
     
+    @State var isCopied = false
     @State var isButtonClicked = false
     @ObservedObject var viewModel = RequestListViewModel()
     
@@ -25,11 +26,29 @@ struct enrolledStudentCard: View {
             VStack {
                 HStack {
                     VStack(alignment: .leading) {
-                     
-                        
                         Text(studentName)
-                            .font(AppFont.mediumSemiBold)
+                            .font(AppFont.smallReg)
                         Spacer()
+                        HStack {
+                            Image(systemName: "phone.fill")
+                                .font(.system(size: 17))
+                            
+                            Text(String("\(phoneNumber)"))
+                                .font(AppFont.actionButton)
+                        }
+                        .padding([.top, .bottom], 6)
+                        .padding([.leading, .trailing], 12)
+                        .background(Color.phoneAccent)
+                        .foregroundStyle(Color.black)
+                        .cornerRadius(50)
+                        .onTapGesture {
+                            let phoneNumberString = "\(phoneNumber)"
+                            UIPasteboard.general.string = phoneNumberString
+                            isCopied = true
+                        }
+                        .alert(isPresented: $isCopied) {
+                            Alert(title: Text("Copied!"), message: Text("Phone number copied to clipboard."), dismissButton: .default(Text("OK")))
+                        }
                     }
                     
                     Spacer()
@@ -48,13 +67,15 @@ struct enrolledStudentCard: View {
                         .frame(minWidth: 90, minHeight: 30)
                         .background(Color.red)
                         .cornerRadius(8)
+                        
+                        Spacer()
                     }
                 }
                 Spacer()
             }
             .frame(maxWidth: .infinity, maxHeight: 70)
             .padding()
-            .background(Color.accent)
+            .background(Color.elavated)
             .foregroundColor(.black)
             .cornerRadius(10)
         }

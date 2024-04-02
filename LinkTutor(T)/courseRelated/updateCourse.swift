@@ -53,6 +53,7 @@ struct updateCourse: View {
                             .cornerRadius(10)
                     }
                     .listRowBackground(Color.darkbg)
+                    .multilineTextAlignment(.leading)
                     
                     // Choose Days
                     Section{
@@ -107,6 +108,7 @@ struct updateCourse: View {
                             .keyboardType(.numberPad)
                     }
                     .listRowBackground(Color.darkbg)
+                    .multilineTextAlignment(.leading)
                     
                     //update button
                     HStack{
@@ -129,8 +131,8 @@ struct updateCourse: View {
                             isTeacherHomePageActive = true
                             presentationMode.wrappedValue.dismiss()
                         }) {
-                            Text("Update Class")
-                                .foregroundColor(.black)
+                            Text("Update details")
+                                .foregroundColor(.white)
                                 .font(AppFont.mediumSemiBold)
                         }
                         .frame(width:250, height: 25)

@@ -14,32 +14,42 @@ struct teacherSubjectList: View {
     let userId = Auth.auth().currentUser?.uid
     
     var body: some View {
-        ScrollView {
-            
-            ForEach(viewModel.skillTypes) { skillType in
-                
-               
-                    
-                VStack{
-                    
-                    ForEach(skillType.skillOwnerDetails.filter { $0.teacherUid == userId  }) { detail in
-                        VStack(alignment: .leading) {
-                            NavigationLink(destination : enrolledStudentList(className : detail.className) ){
-                                Text("\(detail.className)")
-                                    .padding()
-                                
+        VStack{
+            HStack{
+                Text("My Students")
+                    .font(AppFont.largeBold)
+                Spacer()
+            }
+            ScrollView {
+                ForEach(viewModel.skillTypes) { skillType in
+                    VStack{
+                        ForEach(skillType.skillOwnerDetails.filter { $0.teacherUid == userId  }) { detail in
+                            VStack(alignment: .leading) {
+                                NavigationLink(destination : enrolledStudentList(className : detail.className) ){
+                                    VStack{
+                                        HStack{
+                                            Text("\(detail.className)")
+                                                .font(AppFont.smallReg)
+                                                .foregroundStyle(Color.black)
+                                            Spacer()
+                                            Image(systemName: "arrow.right")
+                                                .foregroundColor(.accent)
+                                        }
+                                        Divider()
+                                    }
+                                }
                             }
-                            
-                            
                         }
                     }
+                    .onAppear() {
+                        viewModel.fetchSkillOwnerDetails(for: skillType)
+                    }
                 }
-                .padding()
-                .onAppear() {
-                    viewModel.fetchSkillOwnerDetails(for: skillType)
-                }
-            }
+            }//scroll end
+            Spacer()
         }
+        .padding()
+        .background(Color.background)
     }
 }
 
