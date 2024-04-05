@@ -139,7 +139,7 @@ class AuthViewModel: ObservableObject {
     }
     
     //To add Course Data
-     func addCourseData(skillType: String, academyName: String, className: String, mode: String, fees: Int, week: [String], startTime: String, endTime: String) {
+     func addCourseData(skillType: String, academyName: String, className: String, mode: String, fees: Int, week: [String], startTime: Date, endTime: Date) {
         
          let skill = skillType
          let db = Firestore.firestore()

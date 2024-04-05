@@ -38,21 +38,23 @@ struct CalendarView: View {
                     }
                 
                     
-                    Text(dateDescription(for: selectedDate.addingTimeInterval(24 * 60 * 60)))
-                        .font(.headline)
-                        .padding()
-                        
-                    VStack(spacing: 10) {
-                        if let classesForNextToSelectedDate = classesForNextToSelectedDate(), !classesForNextToSelectedDate.isEmpty {
-                            ForEach(classesForNextToSelectedDate, id: \.id) { enrolledClass in
-                                    if enrolledClass.teacherUid == userId && enrolledClass.requestAccepted == 1 {
-                                    calenderPage(className: enrolledClass.className, tutorName: enrolledClass.teacherName, startTime: enrolledClass.startTime.dateValue())
+                    if ( formattedWeekday(for: selectedDate) == formattedWeekday(for: Date()) ){
+                        Text(dateDescription(for: selectedDate.addingTimeInterval(24 * 60 * 60)))
+                            .font(.headline)
+                            .padding()
+                            
+                        VStack(spacing: 10) {
+                            if let classesForNextToSelectedDate = classesForNextToSelectedDate(), !classesForNextToSelectedDate.isEmpty {
+                                ForEach(classesForNextToSelectedDate, id: \.id) { enrolledClass in
+                                        if enrolledClass.teacherUid == userId && enrolledClass.requestAccepted == 1 {
+                                        calenderPage(className: enrolledClass.className, tutorName: enrolledClass.teacherName, startTime: enrolledClass.startTime.dateValue())
+                                        }
                                     }
-                                }
-                        } else {
-                            Text("No classes found")
-                                .foregroundColor(.gray)
-                                .padding()
+                            } else {
+                                Text("No classes found")
+                                    .foregroundColor(.gray)
+                                    .padding()
+                            }
                         }
                     }
                 }
@@ -83,7 +85,7 @@ struct CalendarView: View {
         } else if selectedDay == tomorrow {
             return "Tomorrow, \(formattedWeekday(for: date))"
         } else {
-            return "\(formattedWeekday(for: date))"
+            return "Selected day: \(formattedWeekday(for: date))"
         }
     }
     

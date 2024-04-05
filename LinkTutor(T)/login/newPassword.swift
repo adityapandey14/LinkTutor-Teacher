@@ -60,17 +60,18 @@ struct newPassword: View {
                 } label : {
                     Text("Submit")
                         .font(AppFont.mediumSemiBold)
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                 }
                 .frame(width: 250, height: 35)
                 .padding()
                 .disabled(!FormIsValid)
                 .opacity(FormIsValid ? 1.0 : 0.5)
-                .background(Color.blue)
+                .background(Color.accent)
                 .cornerRadius(50)
             }
             Spacer()
         }
+        .background(Color.background)
     }
 }
 

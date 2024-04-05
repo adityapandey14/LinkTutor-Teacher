@@ -30,7 +30,7 @@ struct TeacherHomePage: View {
                             Text(" Add a Class !")
                             Spacer()
                         }
-                        .frame(maxWidth: .infinity, maxHeight: 28)
+//                        .frame(maxWidth: .infinity, maxHeight: 28)
                         .font(AppFont.mediumSemiBold)
                         .padding()
                         .background(Color.accent)
@@ -49,33 +49,33 @@ struct TeacherHomePage: View {
                 VStack {
                     // Today's classes section
                     HStack {
-                        Text("My classes today")
-                            .font(AppFont.mediumSemiBold)
+                        SectionHeader(sectionName: "Today's classes", fileLocation: myClassesView())
                         Spacer()
                     }
-                    .padding(.top, 30)
+                    .padding(.top, 15)
                     .padding(.bottom, 15)
                     
                     // Today's classes cards
-                    ScrollView(.horizontal, showsIndicators: false) {
+                    
                         if let classesForSelectedDate = classesForToday(), !classesForSelectedDate.isEmpty {
-
-                            VStack {
-                                ForEach(classesForSelectedDate.filter { $0.teacherUid == userId && $0.requestAccepted == 1 }, id: \.id) { enrolledClass in
-                                    calenderPage(className: enrolledClass.className, tutorName: enrolledClass.teacherName, startTime: enrolledClass.startTime.dateValue())
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack {
+                                    ForEach(classesForSelectedDate.filter { $0.teacherUid == userId && $0.requestAccepted == 1 }, id: \.id) { enrolledClass in
+                                        calenderPage(className: enrolledClass.className, tutorName: enrolledClass.teacherName, startTime: enrolledClass.startTime.dateValue())
+                                    }
                                 }
                             }
+                            
                         } else {
-                            VStack {
+                            HStack {
                                 Spacer()
-                                Text("Have a break, No classes today")
+                                Text("Take a break, No classes today")
                                     .foregroundColor(.gray)
                                     .padding()
                                 Spacer()
                             }
-                            .frame(height: 100)
                         }
-                    }
+                    
                     
                     // My courses section
                     SectionHeader(sectionName: "My classes", fileLocation: enrolledClassCardList())

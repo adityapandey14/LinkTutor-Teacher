@@ -27,15 +27,15 @@ struct homePageComplete: View {
                     Label("Requests" , systemImage: "shared.with.you")
                 }
             
-           teacherSubjectList()
-                .tabItem {
-                    Label("Students" , systemImage: "shared.with.you")
-                }
-            
-            classLandingPage()
-                 .tabItem {
-                     Label("classLanding" , systemImage: "shared.with.you")
-                 }
+//           teacherSubjectList()
+//                .tabItem {
+//                    Label("Students" , systemImage: "shared.with.you")
+//                }
+//            
+//            classLandingPage()
+//                 .tabItem {
+//                     Label("classLanding" , systemImage: "shared.with.you")
+//                 }
         }
         .accentColor(Color.accent)
     }

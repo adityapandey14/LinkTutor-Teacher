@@ -129,15 +129,15 @@ struct addCoursePage: View {
                                 mode: selectedMode.rawValue,
                                 fees: classFee,
                                 week: selectedDays.map { $0.rawValue },
-                                startTime: startTime.description,
-                                endTime: endTime.description
+                                startTime: startTime,
+                                endTime: endTime
                             )
                             // Activate the navigation to TeacherHomePage
                             isTeacherHomePageActive = true
                             presentationMode.wrappedValue.dismiss()
                         }) {
                             Text("Add Class")
-                                .foregroundColor(.black)
+                                .foregroundColor(.white)
                                 .font(AppFont.mediumSemiBold)
                         }
                         .frame(width:250, height: 25)

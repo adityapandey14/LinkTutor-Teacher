@@ -25,6 +25,7 @@ struct RequestList: View {
             
             VStack {
                 ForEach(viewModel.enrolledStudents.filter { $0.teacherUid == userId  && $0.requestSent == 1 }, id: \.id) { student in
+                    
                     RequestListCard(studentName: student.studentName, phoneNumber: student.studentNumber , id: student.id, className: student.className)
                 }
                 .onAppear(){

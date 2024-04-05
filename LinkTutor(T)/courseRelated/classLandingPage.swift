@@ -40,7 +40,8 @@ struct classLandingPage: View {
     }
     
     func detailNavigationLink(detail: SkillOwnerDetail) -> some View {
-        NavigationLink(destination: LandingPageCard(academy: detail.academy,
+        NavigationLink(destination: LandingPageCard( skillOwnerDetailsUid : detail.id,
+                                                   academy: detail.academy,
                                                     documentId: detail.id,
                                                      className: detail.className,
                                                      startTime: detail.startTime.dateValue(), // Convert to Date
@@ -64,6 +65,7 @@ struct classLandingPage_Previews: PreviewProvider {
 }
 
 struct LandingPageCard: View {
+    var skillOwnerDetailsUid : String
     var academy: String
     var documentId: String
     var className: String
@@ -101,29 +103,29 @@ struct LandingPageCard: View {
             }
             
             //STARS
-//            HStack {
-//                let reviewsForSkillOwner = reviewViewModel.reviewDetails.filter { $0.teacherUid == teacherUid && $0.skillOwnerDetailsUid == skillOnwerDetailsUid }
-//                                                      
-//                if !reviewsForSkillOwner.isEmpty {
-//                    let averageRating = reviewsForSkillOwner.reduce(0.0) { $0 + Double($1.ratingStar) } / Double(reviewsForSkillOwner.count)
-//                    
-//                    Text("\(averageRating, specifier: "%.1f") ⭐️")
-//                        .padding([.top, .bottom], 4)
-//                        .padding([.leading, .trailing], 12)
-//                        .background(Color.elavated)
-//                        .cornerRadius(50)
-//                    
-//                    Text("\(reviewsForSkillOwner.count) Review\(reviewsForSkillOwner.count == 1 ? "" : "s")")
-//                        .font(AppFont.smallReg)
-//                        .foregroundColor(.black).opacity(0.6)
-//                } else {
-//                    Text("No Review")
-//                        .font(AppFont.smallReg)
-//                        .foregroundColor(.black)
-//                }
-//                Spacer()
-//            }
-//            .padding(.leading, 5)
+            HStack {
+                let reviewsForSkillOwner = reviewViewModel.reviewDetails.filter {  $0.skillOwnerDetailsUid == "\(skillOwnerDetailsUid)" }
+                                                      
+                if !reviewsForSkillOwner.isEmpty {
+                    let averageRating = reviewsForSkillOwner.reduce(0.0) { $0 + Double($1.ratingStar) } / Double(reviewsForSkillOwner.count)
+                    
+                    Text("\(averageRating, specifier: "%.1f") ⭐️")
+                        .padding([.top, .bottom], 4)
+                        .padding([.leading, .trailing], 12)
+                        .background(Color.elavated)
+                        .cornerRadius(50)
+                    
+                    Text("\(reviewsForSkillOwner.count) Review\(reviewsForSkillOwner.count == 1 ? "" : "s")")
+                        .font(AppFont.smallReg)
+                        .foregroundColor(.black).opacity(0.6)
+                } else {
+                    Text("No Review")
+                        .font(AppFont.smallReg)
+                        .foregroundColor(.black)
+                }
+                Spacer()
+            }
+            .padding(.leading, 5)
             
             HStack{
                 //update
@@ -188,7 +190,7 @@ struct LandingPageCard: View {
                                     .foregroundStyle(Color.black).opacity(0.6)
                                 Text("Online")
                                     .font(AppFont.smallReg)
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(.black)
                                 Spacer()
                             }.padding(5)
                             HStack {
@@ -197,7 +199,7 @@ struct LandingPageCard: View {
                                     .foregroundStyle(Color.black).opacity(0.6)
                                 Text("Offline")
                                     .font(AppFont.smallReg)
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(.black)
                                 Spacer()
                             }.padding(5)
                         }
@@ -217,30 +219,24 @@ struct LandingPageCard: View {
                 Spacer()
             }
             
-            //REVIEWS
-//            let teacherDetails = teacherViewModel.teacherDetails.first(where: { $0.id == userId })
-//            if let teacherDetails = teacherDetails {
-//                //reviews
-//                HStack {
-//                    VStack(alignment: .leading) {
-//                        Text("Reviews")
-//                            .font(AppFont.mediumSemiBold)
-//                            .padding(.bottom, 5)
-//                            .padding(.top)
-//
-//                        ForEach(reviewViewModel.reviewDetails.filter { $0.skillUid == "\(teacherDetails.skillUid)" && $0.teacherUid == "\(userId)" && $0.skillOwnerDetailsUid == "\(skillOwnerUid)" }) { teacherDetail in
-//
-//                            if let formattedDate = formatDate(teacherDetail.time) {
-//                                reviewCard(reviewRating: teacherDetail.ratingStar , review: "\(teacherDetail.comment)", time: "\(formattedDate)")
-//                            }
-//                        }// End of For loop
-//                    }
-//                    .padding([.top, .bottom], 10)
-//                    Spacer()
-//                }
-//                Spacer()
-//            }
-            
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("Reviews")
+                        .font(AppFont.mediumSemiBold)
+                        .padding(.bottom, 5)
+                        .padding(.top)
+
+                    ForEach(reviewViewModel.reviewDetails.filter { $0.skillOwnerDetailsUid == "\(skillOwnerDetailsUid)" }) { teacherDetail in
+                        
+                        if let formattedDate = formatDate(teacherDetail.time) {
+                            reviewCard(reviewRating: teacherDetail.ratingStar , review: "\(teacherDetail.comment)", time: "\(formattedDate)")
+                        }
+                      
+                    }// End of For loop
+                }
+                .padding([.top, .bottom], 10)
+                Spacer()
+            }
             
             Spacer()
         }

@@ -36,13 +36,12 @@
 		0FC738632B8DE7D500566981 /* accentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC7385E2B8DE7D400566981 /* accentHeader.swift */; };
 		0FC738652B8DE7F400566981 /* sectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC738642B8DE7F400566981 /* sectionHeader.swift */; };
 		0FE4B9372B9052A6008CB61A /* classLocationSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE4B9362B9052A6008CB61A /* classLocationSwiftUIView.swift */; };
-		8428368A2BBB3A3000DF4BDE /* allClassesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842836892BBB3A3000DF4BDE /* allClassesView.swift */; };
+		8428368A2BBB3A3000DF4BDE /* myClassesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842836892BBB3A3000DF4BDE /* myClassesView.swift */; };
 		8428368D2BBB522000DF4BDE /* chatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428368C2BBB522000DF4BDE /* chatView.swift */; };
 		8428368F2BBB524100DF4BDE /* messageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428368E2BBB524100DF4BDE /* messageView.swift */; };
 		842836912BBB577F00DF4BDE /* message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842836902BBB577F00DF4BDE /* message.swift */; };
 		8449F3912BAD2CFD00135963 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449F3902BAD2CFD00135963 /* CalenderView.swift */; };
 		8449F3932BAD2E7D00135963 /* calenderPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449F3922BAD2E7D00135963 /* calenderPage.swift */; };
-		84600C6B2BB93F3A00849668 /* myClassesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84600C6A2BB93F3A00849668 /* myClassesView.swift */; };
 		B1EB3CC82BBBDA0500BC7778 /* LandingPageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EB3CC72BBBDA0500BC7778 /* LandingPageCard.swift */; };
 		B1EB3CCA2BBBDABD00BC7778 /* quickInfoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EB3CC92BBBDABD00BC7778 /* quickInfoCard.swift */; };
 		B1EB3CCC2BBBDC3600BC7778 /* reviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EB3CCB2BBBDC3600BC7778 /* reviewCard.swift */; };
@@ -112,13 +111,12 @@
 		0FC7385E2B8DE7D400566981 /* accentHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = accentHeader.swift; sourceTree = "<group>"; };
 		0FC738642B8DE7F400566981 /* sectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sectionHeader.swift; sourceTree = "<group>"; };
 		0FE4B9362B9052A6008CB61A /* classLocationSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classLocationSwiftUIView.swift; sourceTree = "<group>"; };
-		842836892BBB3A3000DF4BDE /* allClassesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = allClassesView.swift; sourceTree = "<group>"; };
+		842836892BBB3A3000DF4BDE /* myClassesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myClassesView.swift; sourceTree = "<group>"; };
 		8428368C2BBB522000DF4BDE /* chatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatView.swift; sourceTree = "<group>"; };
 		8428368E2BBB524100DF4BDE /* messageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageView.swift; sourceTree = "<group>"; };
 		842836902BBB577F00DF4BDE /* message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = message.swift; sourceTree = "<group>"; };
 		8449F3902BAD2CFD00135963 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		8449F3922BAD2E7D00135963 /* calenderPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calenderPage.swift; sourceTree = "<group>"; };
-		84600C6A2BB93F3A00849668 /* myClassesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myClassesView.swift; sourceTree = "<group>"; };
 		B1EB3CC72BBBDA0500BC7778 /* LandingPageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageCard.swift; sourceTree = "<group>"; };
 		B1EB3CC92BBBDABD00BC7778 /* quickInfoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quickInfoCard.swift; sourceTree = "<group>"; };
 		B1EB3CCB2BBBDC3600BC7778 /* reviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewCard.swift; sourceTree = "<group>"; };
@@ -309,8 +307,7 @@
 			children = (
 				DF23A2472BA2EFEE00005EDD /* homePageComplete.swift */,
 				0FC7383A2B8DE6B800566981 /* TeacherHomePage.swift */,
-				84600C6A2BB93F3A00849668 /* myClassesView.swift */,
-				842836892BBB3A3000DF4BDE /* allClassesView.swift */,
+				842836892BBB3A3000DF4BDE /* myClassesView.swift */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -511,7 +508,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF283B162BA086680061FF83 /* enrolledClassCardList.swift in Sources */,
-				8428368A2BBB3A3000DF4BDE /* allClassesView.swift in Sources */,
+				8428368A2BBB3A3000DF4BDE /* myClassesView.swift in Sources */,
 				0FC738432B8DE6E800566981 /* myProfileView.swift in Sources */,
 				0F3922682B8F20270019ECA5 /* addCoursePage.swift in Sources */,
 				0FC738592B8DE7C400566981 /* Notifications.swift in Sources */,
@@ -543,7 +540,6 @@
 				0FC738392B8DE6A400566981 /* appFonts.swift in Sources */,
 				DF578C7F2BA23E59005D0CA1 /* RequestListCard.swift in Sources */,
 				8428368F2BBB524100DF4BDE /* messageView.swift in Sources */,
-				84600C6B2BB93F3A00849668 /* myClassesView.swift in Sources */,
 				DF578C7D2BA23E3E005D0CA1 /* RequestList.swift in Sources */,
 				B1EB3CCA2BBBDABD00BC7778 /* quickInfoCard.swift in Sources */,
 				DFAB0B8F2BA2586B00C012ED /* signUpView().swift in Sources */,
